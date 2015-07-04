@@ -9,13 +9,43 @@
 import Foundation
 
 
+
+enum PayloadData {
+    case PayloadDataText (text:String)
+    case PayloadDataImage (url:NSURL)
+    case PayloadDataCustom (customPayload:CustomPayloadData)
+    
+    func identifier() ->String{
+        
+        switch self{
+        case .PayloadDataText(let text):
+            return "text"
+        case .PayloadDataImage(let url):
+            return "image"
+        case .PayloadDataCustom(let customPayload):
+            return "action"
+        default:
+            return "undefined"
+        }
+    }
+}
+
+
 class Payload{
     let senderIdentifier, senderName : String
-    let data : AnyObject
+    let data : PayloadData
     
+    init(senderIdentifier:String,senderName:String,payloadData:PayloadData){
+        self.senderIdentifier = senderIdentifier;
+        self.senderName = senderName;
+        self.data = payloadData;
+    }
+    
+    /*
     init(senderIdentifier:String,senderName:String,data:AnyObject){
         self.senderIdentifier = senderIdentifier;
         self.senderName = senderName;
         self.data = data
     }
+    */
 }

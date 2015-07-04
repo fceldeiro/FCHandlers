@@ -18,7 +18,7 @@ class EventManager{
     }
 
     
-    func addListener(evaluation:(event:Event)->Bool,callback:()->Void){
+    func addListener(evaluation:(event:Event)->Bool,callback:(event:Event)->Void){
         
         self.handlers.append(HandlerCallback(evaluation: evaluation, callback: callback))
         
@@ -33,7 +33,7 @@ class EventManager{
         for handler:HandlerCallback in self.handlers{
             
             if (handler.evaluation(event: newEvent)){
-                handler.callback()
+                handler.callback(event: newEvent)
             }
         }
     }

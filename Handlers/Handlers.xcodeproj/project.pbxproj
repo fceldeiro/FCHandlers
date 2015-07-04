@@ -17,6 +17,7 @@
 		CD0D6A2D1B48414100F0D27A /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0D6A2C1B48414100F0D27A /* Payload.swift */; };
 		CD0D6A2F1B48415D00F0D27A /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0D6A2E1B48415D00F0D27A /* EventManager.swift */; };
 		CD0D6A311B48418700F0D27A /* HandlerCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0D6A301B48418700F0D27A /* HandlerCallback.swift */; };
+		CD9E88761B484D44004DA7BF /* CustomPayloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E88751B484D44004DA7BF /* CustomPayloadData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		CD0D6A2C1B48414100F0D27A /* Payload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
 		CD0D6A2E1B48415D00F0D27A /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		CD0D6A301B48418700F0D27A /* HandlerCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandlerCallback.swift; sourceTree = "<group>"; };
+		CD9E88751B484D44004DA7BF /* CustomPayloadData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPayloadData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				CD0D6A2C1B48414100F0D27A /* Payload.swift */,
 				CD0D6A2E1B48415D00F0D27A /* EventManager.swift */,
 				CD0D6A301B48418700F0D27A /* HandlerCallback.swift */,
+				CD9E88751B484D44004DA7BF /* CustomPayloadData.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				CD0D6A0D1B48346B00F0D27A /* ViewController.swift in Sources */,
 				CD0D6A2B1B48411600F0D27A /* Event.swift in Sources */,
 				CD0D6A2D1B48414100F0D27A /* Payload.swift in Sources */,
+				CD9E88761B484D44004DA7BF /* CustomPayloadData.swift in Sources */,
 				CD0D6A0B1B48346B00F0D27A /* AppDelegate.swift in Sources */,
 				CD0D6A311B48418700F0D27A /* HandlerCallback.swift in Sources */,
 			);
