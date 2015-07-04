@@ -18,11 +18,29 @@ class EventManager{
     }
 
     
-    func addListener(evaluation:(event:Event)->Bool,callback:(event:Event)->Void){
+    func addListener(target:AnyObject, evaluation:(event:Event)->Bool,callback:(event:Event)->Void) ->HandlerCallback{
         
-        self.handlers.append(HandlerCallback(evaluation: evaluation, callback: callback))
+        
+        var handler:HandlerCallback = HandlerCallback(target: target,evaluation: evaluation, callback: callback)
+        
+        self.handlers.append(handler)
+        return handler
         
     }
+
+    // TODO: Must implement
+    func removeListener(handler:HandlerCallback){
+        
+
+    }
+    //TODO: Must implement
+    func removeListener(target:AnyObject){
+        
+    }
+    
+
+    
+    
     
     func triggerEvent(newEvent:Event){
         
@@ -35,8 +53,10 @@ class EventManager{
 
         for handler:HandlerCallback in self.handlers{
             
-            if (handler.evaluation(event: newEvent)){
-                handler.callback(event: newEvent)
+            if let target: AnyObject = handler.target{
+                if (handler.evaluation(event: newEvent)){
+                    handler.callback(event: newEvent)
+                }
             }
         }
     }

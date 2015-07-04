@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     }
     func addListeners(){
         
-        eventManager.addListener({ (event:Event) -> Bool in
+        eventManager.addListener(self , evaluation: { (event:Event) -> Bool in
             
             return event.payload.senderName == "Fabian"
             
@@ -57,13 +57,13 @@ class ViewController: UIViewController {
         
         
         
-        eventManager.addListener({ (event:Event) -> Bool in
+        eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
             return event.payload.senderName == "Ernesto"
             }, callback: { (event:Event) -> Void in
                 println("Event with payload.senderName Ernesto arrived")
         })
         
-        eventManager.addListener({ (event:Event) -> Bool in
+        eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
             
             switch event.payload.data{
             case .PayloadDataText(let text):
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         })
         
         
-        eventManager.addListener({ (event:Event) -> Bool in
+        eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
             //return true
     
             switch event.payload.data{
