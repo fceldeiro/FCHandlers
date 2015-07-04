@@ -27,7 +27,10 @@ class EventManager{
     func triggerEvent(newEvent:Event){
         
         /// Reviso todos los handlers
-        println("triggering event")
+        println("")
+        println("Triggering event:");
+        println(newEvent.description());
+        println("")
         
 
         for handler:HandlerCallback in self.handlers{

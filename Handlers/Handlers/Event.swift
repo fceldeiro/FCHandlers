@@ -11,10 +11,17 @@ import Foundation
 class Event {
     let from,to : String
     let payload : Payload
+    let identifier :String
     
-    init(from:String,to:String,payload:Payload){
+    init(identifier:String, from:String,to:String,payload:Payload){
         self.from = from
         self.to = to
+        self.identifier = identifier;
         self.payload = payload
+    }
+    
+    func description() -> String{
+        
+        return "From:\(from) - To:\(to) - Identifier:\(identifier) \nPayload: \(payload.description())"
     }
 }

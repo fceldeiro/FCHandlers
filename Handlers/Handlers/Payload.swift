@@ -41,6 +41,10 @@ class Payload{
         self.data = payloadData;
     }
     
+    func description()->String{
+        return "SenderId:\(senderIdentifier) - SenderName:\(senderName) - Data:\(data.identifier())"
+    }
+    
     /*
     init(senderIdentifier:String,senderName:String,data:AnyObject){
         self.senderIdentifier = senderIdentifier;

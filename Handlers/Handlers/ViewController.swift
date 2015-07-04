@@ -29,15 +29,20 @@ class ViewController: UIViewController {
     
     func launchCustomEvents(){
         
-        var payloadText = Payload(senderIdentifier: "identifier", senderName: "Fabian", payloadData: PayloadData.PayloadDataText(text: "Custom text"))
-        var eventText = Event(from: "x", to: "y", payload: payloadText)
+        var payloadText = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.PayloadDataText(text: "Custom text"))
+        var eventText = Event(identifier:"xxx-text", from: "x", to: "y", payload: payloadText)
         
-        var payloadImageURL = Payload(senderIdentifier: "identifier", senderName: "Fabian", payloadData: PayloadData.PayloadDataImage(url: NSURL(string: "http://www.google.com")!))
-        var eventImage = Event(from: "x", to: "y", payload: payloadImageURL)
+        var payloadImageURL = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.PayloadDataImage(url: NSURL(string: "http://www.google.com")!))
+        var eventImage = Event(identifier:"xxx-image", from: "x", to: "y", payload: payloadImageURL)
         
         
+        var payloadCustom = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.PayloadDataCustom(customPayload: CustomPayloadData()))
+        var eventCustom = Event(identifier:"xxx-custom",from: "x", to: "y", payload: payloadCustom)
+            
+            
         eventManager.triggerEvent(eventText)
         eventManager.triggerEvent(eventImage)
+        eventManager.triggerEvent(eventCustom)
 
     }
     func addListeners(){
@@ -47,20 +52,15 @@ class ViewController: UIViewController {
             return event.payload.senderName == "Fabian"
             
             }, callback: { (event:Event) -> Void in
-                println("Fabian found listener A")
+                println("Event with payload.senderName Fabian arrived")
         });
         
-        eventManager.addListener({ (event:Event) -> Bool in
-            return event.payload.senderName == "Fabian"
-            }, callback: { (event:Event) -> Void in
-                println("Fabian found listener B")
-        })
         
         
         eventManager.addListener({ (event:Event) -> Bool in
             return event.payload.senderName == "Ernesto"
             }, callback: { (event:Event) -> Void in
-                println("Ernesto not found")
+                println("Event with payload.senderName Ernesto arrived")
         })
         
         eventManager.addListener({ (event:Event) -> Bool in
@@ -75,8 +75,7 @@ class ViewController: UIViewController {
 
                 switch event.payload.data{
                 case .PayloadDataText(let text):
-                    
-                    println("Playload data text \(text)")
+                    println("Event with data of type PayloadDataText with text Custom text = \(text) arrived")
                 default:
                     println("Do nothing")
                 }
@@ -97,7 +96,7 @@ class ViewController: UIViewController {
             }, callback: { (event:Event) -> Void in
                 switch event.payload.data{
                 case .PayloadDataImage(let url):
-                    println("image url \(url)")
+                    println("Event with data of type PayloadDataImage with imageURL \(url) arrived")
                     
                 default:
                     println("do nothing")
