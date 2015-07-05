@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  EventManagerViewController
 //  Handlers
 //
 //  Created by Fabian Celdeiro on 7/4/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class EventManagerViewController: UIViewController {
 
     var eventManager : EventManager!
     
@@ -29,14 +29,14 @@ class ViewController: UIViewController {
     
     func launchCustomEvents(){
         
-        var payloadText = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.PayloadDataText(text: "Custom text"))
+        var payloadText = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.Text(text: "Custom text"))
         var eventText = Event(identifier:"xxx-text", from: "x", to: "y", payload: payloadText)
         
-        var payloadImageURL = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.PayloadDataImage(url: NSURL(string: "http://www.google.com")!))
+        var payloadImageURL = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.Image(url: NSURL(string: "http://www.google.com")!))
         var eventImage = Event(identifier:"xxx-image", from: "x", to: "y", payload: payloadImageURL)
         
         
-        var payloadCustom = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.PayloadDataCustom(customPayload: CustomPayloadData()))
+        var payloadCustom = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.Custom(customPayload: CustomPayloadData()))
         var eventCustom = Event(identifier:"xxx-custom",from: "x", to: "y", payload: payloadCustom)
             
             
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
             
             switch event.payload.data{
-            case .PayloadDataText(let text):
+            case .Text(let text):
                 return (text == "Custom text");
             default: return false
             }
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
             }, callback: { (event:Event) -> Void in
 
                 switch event.payload.data{
-                case .PayloadDataText(let text):
+                case .Text(let text):
                     println("Event with data of type PayloadDataText with text Custom text = \(text) arrived")
                 default:
                     println("Do nothing")
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
             //return true
     
             switch event.payload.data{
-            case .PayloadDataImage(let url):
+            case .Image(let url):
                 return true;
                 
             default:
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
             }
             }, callback: { (event:Event) -> Void in
                 switch event.payload.data{
-                case .PayloadDataImage(let url):
+                case .Image(let url):
                     println("Event with data of type PayloadDataImage with imageURL \(url) arrived")
                     
                 default:
@@ -105,6 +105,9 @@ class ViewController: UIViewController {
         
     }
 
+    deinit{
+        self.eventManager .removeListener(self)
+    }
 
 
 }

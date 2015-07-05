@@ -37,11 +37,7 @@ class EventManager{
     func removeListener(target:AnyObject){
         
     }
-    
-
-    
-    
-    
+        
     func triggerEvent(newEvent:Event){
         
         /// Reviso todos los handlers

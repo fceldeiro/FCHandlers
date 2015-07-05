@@ -11,18 +11,18 @@ import Foundation
 
 
 enum PayloadData {
-    case PayloadDataText (text:String)
-    case PayloadDataImage (url:NSURL)
-    case PayloadDataCustom (customPayload:CustomPayloadData)
+    case Text (text:String)
+    case Image (url:NSURL)
+    case Custom (customPayload:CustomPayloadData)
     
     func identifier() ->String{
         
         switch self{
-        case .PayloadDataText(let text):
+        case .Text(let text):
             return "text"
-        case .PayloadDataImage(let url):
+        case .Image(let url):
             return "image"
-        case .PayloadDataCustom(let customPayload):
+        case .Custom(let customPayload):
             return "action"
         default:
             return "undefined"
