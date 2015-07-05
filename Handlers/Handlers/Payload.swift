@@ -31,6 +31,13 @@ enum PayloadData {
 
 //TODO: Parsing playload data
 class Payload{
+    
+    static let kSenderIdentifier = "sender_identifier"
+    static let kSenderName = "sender_name"
+    static let kData = "data"
+    static let kDataType = "data_type"
+    
+    
     let senderIdentifier : String?
     let senderName : String?
     var data : PayloadData
@@ -39,8 +46,8 @@ class Payload{
     
     init(json:JSON){
         
-        self.senderIdentifier = json["sender_identifier"].string
-        self.senderName = json["sender_name"].string
+        self.senderIdentifier = json[Payload.kSenderIdentifier].string
+        self.senderName = json[Payload.kSenderName].string
         
         self.data = PayloadData.Text(text: "test")
         
@@ -62,11 +69,11 @@ class Payload{
         var json = [String:AnyObject]()
         
         if let senderIdentifier = self.senderIdentifier{
-            json["sender_identifier"] = senderIdentifier
+            json[Payload.kSenderIdentifier] = senderIdentifier
         }
         
         if let senderName = self.senderName{
-            json["sender_name"] = senderName
+            json[Payload.kSenderName] = senderName
         }
         
         return json

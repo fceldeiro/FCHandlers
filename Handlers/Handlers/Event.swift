@@ -10,6 +10,13 @@ import Foundation
 import SwiftyJSON
 
 class Event {
+    
+    static let kFrom = "from"
+    static let kTo = "to"
+    static let kIdentifier = "identifier"
+    static let kPayload = "payload"
+    
+    
     var from : String?
     var to : String?
     var payload : Payload?
@@ -27,20 +34,20 @@ class Event {
     
     init(dictionary:[String:AnyObject]){
         
-        if let from = dictionary["from"] as? String{
+        if let from = dictionary[Event.kFrom] as? String{
             self.from = from
             
         }
         
-        if let to = dictionary["to"] as? String{
+        if let to = dictionary[Event.kTo] as? String{
             self.to = to
         }
         
-        if let identifier = dictionary["identifier"] as? String{
+        if let identifier = dictionary[Event.kIdentifier] as? String{
             self.identifier = identifier
         }
         
-        if let payload = dictionary["payload"] as? [String:AnyObject]{
+        if let payload = dictionary[Event.kPayload] as? [String:AnyObject]{
             
         }
 
@@ -49,10 +56,10 @@ class Event {
     init(json:JSON){
         
 
-        self.from = json["from"].string
-        self.to = json["to"].string
-        self.identifier = json["identifier"].string
-        self.payload = Payload(json: json["payload"])
+        self.from = json[Event.kFrom].string
+        self.to = json[Event.kTo].string
+        self.identifier = json[Event.kIdentifier].string
+        self.payload = Payload(json: json[Event.kPayload])
 
         
     }
@@ -62,19 +69,19 @@ class Event {
         var json = [String:AnyObject]()
         
         if let from = self.from{
-            json["from"] = from
+            json[Event.kFrom] = from
         }
         
         if let to = self.to{
-            json["to"] = to
+            json[Event.kTo] = to
         }
         
         if let identifier = self.identifier{
-            json["identifier"] = identifier
+            json[Event.kIdentifier] = identifier
         }
         
         if let payload = self.payload{
-            json["payload"] = payload.jsonDictionary()
+            json[Event.kPayload] = payload.jsonDictionary()
         }
         
         return json
