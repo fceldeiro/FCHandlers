@@ -60,8 +60,19 @@ class Payload{
     }
     
     func description()->String{
-        return "descrittion";
-        //return "SenderId:\(senderIdentifier) - SenderName:\(senderName) - Data:\(data.identifier())"
+        
+        var desc = String()
+        
+        if let senderID = self.senderIdentifier{
+            desc += "SenderID:\(senderID) - "
+        }
+        
+        if let senderName = self.senderName{
+            desc += "SenderName:\(senderName) - "
+        }
+        
+        return desc
+  
     }
     
     func jsonDictionary() -> [String:AnyObject]{
