@@ -8,7 +8,7 @@
 
 import Foundation
 import Socket_IO_Client_Swift
-
+import SwiftyJSON
 
 
 enum SocketEvent: String{
@@ -43,6 +43,17 @@ class SocketManager {
         socket.on(SocketEvent.Message.rawValue) { data, ack in
             
             
+            if let eventDictionary: AnyObject = data!.lastObject{
+                let json = JSON(eventDictionary)
+                
+                let event: Event = Event(json: json)
+                if let eventManager = self.eventManagers[SocketEvent.Message]{
+                    eventManager.triggerEvent(event)
+                }
+                
+            }
+            
+            /*
             if let eventDictionary: AnyObject = data!.lastObject {
                 if let payloadDic:AnyObject = eventDictionary["payload"]{
                     let payload:Payload = Payload(senderIdentifier: "xxx", senderName: payloadDic["senderName"]! as! String, payloadData: PayloadData.Text(text: "xxxx"));
@@ -57,6 +68,7 @@ class SocketManager {
                 }
                 
             }
+            */
         
             /*
             let payloadText = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.Text(text: "Custom text"))
@@ -104,15 +116,9 @@ class SocketManager {
     }
     
     func emit(socketEvent:SocketEvent, payload:Payload){
-        var dictionary:Dictionary<String,AnyObject> = Dictionary<String,AnyObject>()
+        let event = Event(identifier:"xxx-text", from: "x", to: "y", payload: payload)
+        socket.emit(socketEvent.rawValue, event.jsonDictionary())
         
-        
-        let payloadText = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.Text(text: "Custom text"))
-        let eventText = Event(identifier:"xxx-text", from: "x", to: "y", payload: payloadText)
-        
-        dictionary["payload"] = ["senderName" : payload.senderName]
-        
-        socket.emit(socketEvent.rawValue, dictionary)
     }
     
 

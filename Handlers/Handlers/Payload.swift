@@ -7,8 +7,7 @@
 //
 
 import Foundation
-
-
+import SwiftyJSON
 
 enum PayloadData {
     case Text (text:String)
@@ -30,10 +29,22 @@ enum PayloadData {
     }
 }
 
-
+//TODO: Parsing playload data
 class Payload{
-    let senderIdentifier, senderName : String
-    let data : PayloadData
+    let senderIdentifier : String?
+    let senderName : String?
+    var data : PayloadData
+    
+    
+    
+    init(json:JSON){
+        
+        self.senderIdentifier = json["sender_identifier"].string
+        self.senderName = json["sender_name"].string
+        
+        self.data = PayloadData.Text(text: "test")
+        
+    }
     
     init(senderIdentifier:String,senderName:String,payloadData:PayloadData){
         self.senderIdentifier = senderIdentifier;
@@ -42,7 +53,23 @@ class Payload{
     }
     
     func description()->String{
-        return "SenderId:\(senderIdentifier) - SenderName:\(senderName) - Data:\(data.identifier())"
+        return "descrittion";
+        //return "SenderId:\(senderIdentifier) - SenderName:\(senderName) - Data:\(data.identifier())"
+    }
+    
+    func jsonDictionary() -> [String:AnyObject]{
+        
+        var json = [String:AnyObject]()
+        
+        if let senderIdentifier = self.senderIdentifier{
+            json["sender_identifier"] = senderIdentifier
+        }
+        
+        if let senderName = self.senderName{
+            json["sender_name"] = senderName
+        }
+        
+        return json
     }
     
     /*

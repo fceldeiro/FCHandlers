@@ -49,7 +49,7 @@ class EventManagerViewController: UIViewController {
         
         eventManager.addListener(self , evaluation: { (event:Event) -> Bool in
             
-            return event.payload.senderName == "Fabian"
+            return event.payload?.senderName == "Fabian"
             
             }, callback: { (event:Event) -> Void in
                 println("Event with payload.senderName Fabian arrived")
@@ -58,27 +58,35 @@ class EventManagerViewController: UIViewController {
         
         
         eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
-            return event.payload.senderName == "Ernesto"
+            return event.payload?.senderName == "Ernesto"
             }, callback: { (event:Event) -> Void in
                 println("Event with payload.senderName Ernesto arrived")
         })
         
         eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
             
-            switch event.payload.data{
-            case .Text(let text):
-                return (text == "Custom text");
-            default: return false
+            if let payload:Payload = event.payload{
+                switch payload.data{
+                case .Text(let text):
+                    return (text == "Custom text");
+                default: return false
+                }
+            }
+            else{
+                return false
             }
             
             }, callback: { (event:Event) -> Void in
 
-                switch event.payload.data{
-                case .Text(let text):
-                    println("Event with data of type PayloadDataText with text Custom text = \(text) arrived")
-                default:
-                    println("Do nothing")
+                if let payload:Payload = event.payload{
+                    switch payload.data{
+                    case .Text(let text):
+                    println("Event with data of type PayloadDataText with text Custom text  = \(text) arrived")
+                    default:
+                        println("Do nothing")
+                    }
                 }
+                
                 
         })
         
@@ -86,20 +94,28 @@ class EventManagerViewController: UIViewController {
         eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
             //return true
     
-            switch event.payload.data{
-            case .Image(let url):
-                return true;
+            if let payload = event.payload{
+                switch payload.data{
+                case .Image(let url):
+                    return true;
                 
-            default:
-                return false;
+                default:
+                    return false;
+                }
+            }
+            else{
+                return false
             }
             }, callback: { (event:Event) -> Void in
-                switch event.payload.data{
-                case .Image(let url):
-                    println("Event with data of type PayloadDataImage with imageURL \(url) arrived")
+                
+                if let payload = event.payload{
+                    switch payload.data{
+                    case .Image(let url):
+                        println("Event with data of type PayloadDataImage with imageURL \(url) arrived")
                     
-                default:
-                    println("do nothing")
+                    default:
+                        println("do nothing")
+                    }
                 }
         })
         

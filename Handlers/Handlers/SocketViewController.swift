@@ -21,40 +21,45 @@ class SocketViewController: UIViewController {
         
         socketManager.connect()
         socketManager.addListener(SocketEvent.Message, target: self, evaluation: { (event:Event) -> Bool in
-            return event.payload.senderName == "Fabian"
+            return event.payload?.senderName == "Fabian"
             }) { (event:Event) -> Void in
                 
-                var message = String()
-                message += event.payload.senderName
-                
-                switch event.payload.data{
-                case .Text(let text):
-                    message+=" "
-                    message+=text
-                    self.labelFabianLastMessage.text = event.payload.senderName + " : " + message
+                if let payload:Payload = event.payload, let senderName:String = payload.senderName{
                     
-                default: println("shit happens")
+                    var message = String()
+                    message += senderName
+                
+                    switch payload.data{
+                    case .Text(let text):
+                        message+=" "
+                        message+=text
+                        self.labelFabianLastMessage.text = senderName + " : " + message
+                    
+                    default: println("shit happens")
+                    }
                 }
 
                 
         }
         
         socketManager.addListener(SocketEvent.Message, target: self, evaluation: { (event:Event) -> Bool in
-            return event.payload.senderName == "MisterX"
+            return event.payload?.senderName == "MisterX"
             }) { (event:Event) -> Void in
                 
-                var message = String()
-                message += event.payload.senderName
-                
-                switch event.payload.data{
-                case .Text(let text):
-                    message+=" "
-                    message+=text
-                    self.labelMisterXLastMessage.text = event.payload.senderName + " : " + message
+                if let payload:Payload = event.payload, let senderName:String = payload.senderName{
                     
-                default: println("shit happens")
-                }
+                    var message = String()
+                    message += senderName
                 
+                    switch payload.data{
+                    case .Text(let text):
+                        message+=" "
+                        message+=text
+                        self.labelMisterXLastMessage.text = senderName + " : " + message
+                    
+                    default: println("shit happens")
+                    }
+                }
                 
         }
         
