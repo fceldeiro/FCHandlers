@@ -13,6 +13,7 @@ class Event {
     let payload : Payload
     let identifier :String
     
+
     init(identifier:String, from:String,to:String,payload:Payload){
         self.from = from
         self.to = to

@@ -43,11 +43,28 @@ class SocketManager {
         socket.on(SocketEvent.Message.rawValue) { data, ack in
             
             
+            if let eventDictionary: AnyObject = data!.lastObject {
+                if let payloadDic:AnyObject = eventDictionary["payload"]{
+                    let payload:Payload = Payload(senderIdentifier: "xxx", senderName: payloadDic["senderName"]! as! String, payloadData: PayloadData.Text(text: "xxxx"));
+                
+                //let payloadText:Payload = Payload( "xxx", senderName: eventDictionary["senderIdentifier"]!, payloadData: PayloadData.Text(text: "saarasa"));
+
+                    let eventText = Event(identifier:"xxx-text", from: "x", to: "y", payload: payload)
+
+                
+                    let eventManager = self.eventManagers[SocketEvent.Message]
+                    eventManager?.triggerEvent(eventText)
+                }
+                
+            }
+        
+            /*
             let payloadText = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.Text(text: "Custom text"))
             let eventText = Event(identifier:"xxx-text", from: "x", to: "y", payload: payloadText)
 
             let eventManager = self.eventManagers[SocketEvent.Message]
             eventManager?.triggerEvent(eventText)
+            */
             
         }
         
@@ -87,7 +104,15 @@ class SocketManager {
     }
     
     func emit(socketEvent:SocketEvent, payload:Payload){
-        socket.emit(socketEvent.rawValue, ["sarasa"])
+        var dictionary:Dictionary<String,AnyObject> = Dictionary<String,AnyObject>()
+        
+        
+        let payloadText = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.Text(text: "Custom text"))
+        let eventText = Event(identifier:"xxx-text", from: "x", to: "y", payload: payloadText)
+        
+        dictionary["payload"] = ["senderName" : payload.senderName]
+        
+        socket.emit(socketEvent.rawValue, dictionary)
     }
     
 

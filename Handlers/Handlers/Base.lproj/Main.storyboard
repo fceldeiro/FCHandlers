@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gad-3O-8c1">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Root View Controller-->
@@ -94,24 +95,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j94-7t-erY">
-                                <rect key="frame" x="16" y="72" width="288" height="30"/>
-                                <state key="normal" title="Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j94-7t-erY">
+                                <rect key="frame" x="0.0" y="72" width="160" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.50196078430000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7Ow-NA-cNN"/>
+                                </constraints>
+                                <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Message from Fabian">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="buttonPressed:" destination="LQo-Rv-G6l" eventType="touchUpInside" id="Hrc-pa-eoS"/>
+                                    <action selector="buttonMessageFromFabianPressed:" destination="LQo-Rv-G6l" eventType="touchUpInside" id="GVI-jK-cEL"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Htf-gC-Ivs">
-                                <rect key="frame" x="16" y="118" width="288" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="26" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9i-C9-XQO">
+                                <rect key="frame" x="160" y="72" width="160" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Message from X">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonMessageFromXPressed:" destination="LQo-Rv-G6l" eventType="touchUpInside" id="LEs-L0-tYi"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VnT-py-2yR" userLabel="fabianMessageLabel">
+                                <rect key="frame" x="0.0" y="112" width="160" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1x-w1-DEf" userLabel="misterXMessageLabel">
+                                <rect key="frame" x="160" y="112" width="160" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="E9i-C9-XQO" firstAttribute="centerY" secondItem="j94-7t-erY" secondAttribute="centerY" id="0wC-JN-yez"/>
+                            <constraint firstItem="j94-7t-erY" firstAttribute="centerX" secondItem="VnT-py-2yR" secondAttribute="centerX" id="3Jd-YZ-QJD"/>
+                            <constraint firstItem="j94-7t-erY" firstAttribute="top" secondItem="XLc-wm-izq" secondAttribute="bottom" constant="8" id="459-Gh-LTm"/>
+                            <constraint firstAttribute="width" secondItem="VnT-py-2yR" secondAttribute="width" id="8WH-aZ-Wat"/>
+                            <constraint firstAttribute="centerX" secondItem="VnT-py-2yR" secondAttribute="centerX" id="D5s-Yn-hHH"/>
+                            <constraint firstAttribute="trailing" secondItem="E9i-C9-XQO" secondAttribute="trailing" id="ErX-wX-gRa"/>
+                            <constraint firstItem="E9i-C9-XQO" firstAttribute="centerX" secondItem="w1x-w1-DEf" secondAttribute="centerX" id="MC0-re-XZU"/>
+                            <constraint firstItem="VnT-py-2yR" firstAttribute="top" secondItem="j94-7t-erY" secondAttribute="bottom" constant="10" id="Nf5-f3-LnK"/>
+                            <constraint firstItem="j94-7t-erY" firstAttribute="width" secondItem="VnT-py-2yR" secondAttribute="width" id="TES-dD-KQV"/>
+                            <constraint firstItem="VnT-py-2yR" firstAttribute="centerY" secondItem="w1x-w1-DEf" secondAttribute="centerY" id="WdA-WI-l4N"/>
+                            <constraint firstItem="E9i-C9-XQO" firstAttribute="width" secondItem="w1x-w1-DEf" secondAttribute="width" id="Ya2-1A-ocB"/>
+                            <constraint firstItem="j94-7t-erY" firstAttribute="leading" secondItem="Olf-5G-VaK" secondAttribute="leading" id="enI-b7-asu"/>
+                            <constraint firstItem="E9i-C9-XQO" firstAttribute="width" secondItem="j94-7t-erY" secondAttribute="width" id="fgh-lG-wfq"/>
+                            <constraint firstItem="j94-7t-erY" firstAttribute="width" secondItem="Olf-5G-VaK" secondAttribute="width" multiplier="0.5" id="oRS-3e-DPY"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="8WH-aZ-Wat"/>
+                                <exclude reference="D5s-Yn-hHH"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="labelFabianLastMessage" destination="VnT-py-2yR" id="nzD-m3-xqK"/>
+                        <outlet property="labelMisterXLastMessage" destination="w1x-w1-DEf" id="ASu-Oi-T3r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eFG-1i-cAQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
