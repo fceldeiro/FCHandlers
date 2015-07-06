@@ -34,7 +34,6 @@ enum PayloadDataType : String{
 
 
 
-//TODO: Parsing playload data
 class Payload{
     
     static let kSenderIdentifier = "sender_identifier"
@@ -151,11 +150,4 @@ class Payload{
         return json
     }
     
-    /*
-    init(senderIdentifier:String,senderName:String,data:AnyObject){
-        self.senderIdentifier = senderIdentifier;
-        self.senderName = senderName;
-        self.data = data
-    }
-    */
 }

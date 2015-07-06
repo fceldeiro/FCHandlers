@@ -110,6 +110,5 @@ class Event {
         
         return desc
         
-      //  return "From:\(from) - To:\(to) - Identifier:\(identifier) \nPayload: \(payload?.description())"
     }
 }

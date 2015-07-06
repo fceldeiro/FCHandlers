@@ -21,6 +21,7 @@
 		CD1066B71B48D8E3000E88A3 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066B61B48D8E3000E88A3 /* SocketManager.swift */; };
 		CD1066B91B48E02A000E88A3 /* SocketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066B81B48E02A000E88A3 /* SocketViewController.swift */; };
 		CD1066BB1B48E069000E88A3 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066BA1B48E069000E88A3 /* MenuTableViewController.swift */; };
+		CD1066BD1B4A3D3C000E88A3 /* SocketViewControllerSocketEventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066BC1B4A3D3C000E88A3 /* SocketViewControllerSocketEventListener.swift */; };
 		CD9E88761B484D44004DA7BF /* CustomPayloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E88751B484D44004DA7BF /* CustomPayloadData.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		CD1066B61B48D8E3000E88A3 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		CD1066B81B48E02A000E88A3 /* SocketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketViewController.swift; sourceTree = "<group>"; };
 		CD1066BA1B48E069000E88A3 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		CD1066BC1B4A3D3C000E88A3 /* SocketViewControllerSocketEventListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketViewControllerSocketEventListener.swift; sourceTree = "<group>"; };
 		CD9E88751B484D44004DA7BF /* CustomPayloadData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPayloadData.swift; sourceTree = "<group>"; };
 		EAFD0E6ED2C9C58B9D8622DE /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -131,6 +133,7 @@
 				CD1066BA1B48E069000E88A3 /* MenuTableViewController.swift */,
 				CD0D6A0C1B48346B00F0D27A /* EventManagerViewController.swift */,
 				CD1066B81B48E02A000E88A3 /* SocketViewController.swift */,
+				CD1066BC1B4A3D3C000E88A3 /* SocketViewControllerSocketEventListener.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				CD1066BB1B48E069000E88A3 /* MenuTableViewController.swift in Sources */,
 				CD1066B71B48D8E3000E88A3 /* SocketManager.swift in Sources */,
 				CD0D6A2B1B48411600F0D27A /* Event.swift in Sources */,
+				CD1066BD1B4A3D3C000E88A3 /* SocketViewControllerSocketEventListener.swift in Sources */,
 				CD0D6A2D1B48414100F0D27A /* Payload.swift in Sources */,
 				CD9E88761B484D44004DA7BF /* CustomPayloadData.swift in Sources */,
 				CD0D6A0B1B48346B00F0D27A /* AppDelegate.swift in Sources */,

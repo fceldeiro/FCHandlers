@@ -16,11 +16,23 @@ class SocketViewController: UIViewController {
     @IBOutlet weak var labelFabianLastMessage: UILabel!
     @IBOutlet weak var labelMisterXLastMessage: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    let socketEventListener  = SocketViewControllerSocketEventListener()
+    
+    deinit{
+        println("deInit")
+    }
+    
+    
+    private func stopListening() {
+        socketManager.removeListener(socketEventListener)
+    }
+    
+    private func startListening() {
         
-        socketManager.connect()
-        socketManager.addListener(SocketEvent.Message, target: self, evaluation: { (event:Event) -> Bool in
+        weak var weakSelf  = self;
+        
+        socketManager.addListener(SocketEvent.Message, owner: socketEventListener, evaluation: { (event:Event) -> Bool in
             return event.payload?.senderName == "Fabian"
             }) { (event:Event) -> Void in
                 
@@ -28,21 +40,21 @@ class SocketViewController: UIViewController {
                     
                     var message = String()
                     message += senderName
-                
+                    
                     switch payloadData{
                     case .Text(let text):
                         message+=" "
                         message+=text
-                        self.labelFabianLastMessage.text = senderName + " : " + message
-                    
+                        weakSelf?.labelFabianLastMessage.text = senderName + " : " + message
+                        
                     default: println("shit happens")
                     }
                 }
-
+                
                 
         }
         
-        socketManager.addListener(SocketEvent.Message, target: self, evaluation: { (event:Event) -> Bool in
+        socketManager.addListener(SocketEvent.Message, owner: socketEventListener, evaluation: { (event:Event) -> Bool in
             return event.payload?.senderName == "MisterX"
             }) { (event:Event) -> Void in
                 
@@ -50,18 +62,29 @@ class SocketViewController: UIViewController {
                     
                     var message = String()
                     message += senderName
-                
+                    
                     switch payloadData{
                     case .Text(let text):
                         message+=" "
                         message+=text
-                        self.labelMisterXLastMessage.text = senderName + " : " + message
-                    
+                        weakSelf?.labelMisterXLastMessage.text = senderName + " : " + message
+                        
                     default: println("shit happens")
                     }
                 }
                 
         }
+
+    }
+    override func viewWillDisappear(animated: Bool) {
+        
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        socketManager.connect()
+        startListening()
+        
         
 
         // Do any additional setup after loading the view.
@@ -79,6 +102,18 @@ class SocketViewController: UIViewController {
     @IBAction func buttonMessageFromXPressed(sender:UIButton){
         socketManager.emit(SocketEvent.Message, payload: Payload(senderIdentifier: "mister_x", senderName: "MisterX", payloadData: PayloadData.Text(text: "GATO")))
         
+    }
+    
+    @IBAction func buttonStartListeningPressed(sender:UIButton){
+        startListening()
+    }
+    @IBAction func buttonStopListeningPressed(sender:UIButton){
+        stopListening()
+    }
+    
+    @IBAction func buttonClearPressed(sender:UIButton){
+        labelFabianLastMessage.text = ""
+        labelMisterXLastMessage.text = ""
     }
 
 }

@@ -10,12 +10,10 @@ import Foundation
 
 class HandlerCallback {
     
-    weak var target: AnyObject?
     let evaluation : (event:Event) -> Bool
     let callback : (event:Event) -> Void
     
-    init (target:AnyObject, evaluation:(event:Event) ->Bool, callback:(event:Event)-> Void){
-        self.target = target
+    init (evaluation:(event:Event) ->Bool, callback:(event:Event)-> Void){
         self.evaluation = evaluation
         self.callback = callback
     }

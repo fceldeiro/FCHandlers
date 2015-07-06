@@ -137,9 +137,37 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1x8-aE-BJJ">
+                                <rect key="frame" x="11" y="179" width="100" height="30"/>
+                                <state key="normal" title="Start Listening">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonStartListeningPressed:" destination="LQo-Rv-G6l" eventType="touchUpInside" id="caE-5F-Wgh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twa-Uo-Bkz">
+                                <rect key="frame" x="205" y="179" width="99" height="30"/>
+                                <state key="normal" title="Stop Listening">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonStopListeningPressed:" destination="LQo-Rv-G6l" eventType="touchUpInside" id="gv7-2U-5Ff"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFw-aL-dt7">
+                                <rect key="frame" x="137" y="218" width="37" height="30"/>
+                                <state key="normal" title="Clear">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonClearPressed:" destination="LQo-Rv-G6l" eventType="touchUpInside" id="fFP-Q1-aYQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="twa-Uo-Bkz" firstAttribute="centerY" secondItem="1x8-aE-BJJ" secondAttribute="centerY" id="09t-ov-RgD"/>
                             <constraint firstItem="E9i-C9-XQO" firstAttribute="centerY" secondItem="j94-7t-erY" secondAttribute="centerY" id="0wC-JN-yez"/>
                             <constraint firstItem="j94-7t-erY" firstAttribute="centerX" secondItem="VnT-py-2yR" secondAttribute="centerX" id="3Jd-YZ-QJD"/>
                             <constraint firstItem="j94-7t-erY" firstAttribute="top" secondItem="XLc-wm-izq" secondAttribute="bottom" constant="8" id="459-Gh-LTm"/>
@@ -148,12 +176,17 @@
                             <constraint firstAttribute="trailing" secondItem="E9i-C9-XQO" secondAttribute="trailing" id="ErX-wX-gRa"/>
                             <constraint firstItem="E9i-C9-XQO" firstAttribute="centerX" secondItem="w1x-w1-DEf" secondAttribute="centerX" id="MC0-re-XZU"/>
                             <constraint firstItem="VnT-py-2yR" firstAttribute="top" secondItem="j94-7t-erY" secondAttribute="bottom" constant="10" id="Nf5-f3-LnK"/>
+                            <constraint firstItem="lFw-aL-dt7" firstAttribute="top" secondItem="1x8-aE-BJJ" secondAttribute="bottom" constant="9" id="QvD-ZZ-mJZ"/>
                             <constraint firstItem="j94-7t-erY" firstAttribute="width" secondItem="VnT-py-2yR" secondAttribute="width" id="TES-dD-KQV"/>
                             <constraint firstItem="VnT-py-2yR" firstAttribute="centerY" secondItem="w1x-w1-DEf" secondAttribute="centerY" id="WdA-WI-l4N"/>
                             <constraint firstItem="E9i-C9-XQO" firstAttribute="width" secondItem="w1x-w1-DEf" secondAttribute="width" id="Ya2-1A-ocB"/>
                             <constraint firstItem="j94-7t-erY" firstAttribute="leading" secondItem="Olf-5G-VaK" secondAttribute="leading" id="enI-b7-asu"/>
                             <constraint firstItem="E9i-C9-XQO" firstAttribute="width" secondItem="j94-7t-erY" secondAttribute="width" id="fgh-lG-wfq"/>
+                            <constraint firstAttribute="centerX" secondItem="lFw-aL-dt7" secondAttribute="centerX" constant="4.5" id="gJZ-fN-xXp"/>
+                            <constraint firstItem="1x8-aE-BJJ" firstAttribute="leading" secondItem="Olf-5G-VaK" secondAttribute="leading" constant="11" id="gQZ-RN-Fy5"/>
                             <constraint firstItem="j94-7t-erY" firstAttribute="width" secondItem="Olf-5G-VaK" secondAttribute="width" multiplier="0.5" id="oRS-3e-DPY"/>
+                            <constraint firstAttribute="trailing" secondItem="twa-Uo-Bkz" secondAttribute="trailing" constant="16" id="w9s-UQ-81n"/>
+                            <constraint firstItem="1x8-aE-BJJ" firstAttribute="top" secondItem="VnT-py-2yR" secondAttribute="bottom" constant="51" id="x4j-n0-gnb"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

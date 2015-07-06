@@ -50,34 +50,7 @@ class SocketManager {
                 if let eventManager = self.eventManagers[SocketEvent.Message]{
                     eventManager.triggerEvent(event)
                 }
-                
             }
-            
-            /*
-            if let eventDictionary: AnyObject = data!.lastObject {
-                if let payloadDic:AnyObject = eventDictionary["payload"]{
-                    let payload:Payload = Payload(senderIdentifier: "xxx", senderName: payloadDic["senderName"]! as! String, payloadData: PayloadData.Text(text: "xxxx"));
-                
-                //let payloadText:Payload = Payload( "xxx", senderName: eventDictionary["senderIdentifier"]!, payloadData: PayloadData.Text(text: "saarasa"));
-
-                    let eventText = Event(identifier:"xxx-text", from: "x", to: "y", payload: payload)
-
-                
-                    let eventManager = self.eventManagers[SocketEvent.Message]
-                    eventManager?.triggerEvent(eventText)
-                }
-                
-            }
-            */
-        
-            /*
-            let payloadText = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.Text(text: "Custom text"))
-            let eventText = Event(identifier:"xxx-text", from: "x", to: "y", payload: payloadText)
-
-            let eventManager = self.eventManagers[SocketEvent.Message]
-            eventManager?.triggerEvent(eventText)
-            */
-            
         }
         
         eventManagers[SocketEvent.Error] = EventManager()
@@ -93,10 +66,10 @@ class SocketManager {
         socket.close(fast: false)
     }
     
-    func addListener(socketEvent:SocketEvent, target:AnyObject, evaluation:(event:Event)->Bool,callback:(event:Event)->Void) ->HandlerCallback? {
+    func addListener(socketEvent:SocketEvent, owner:NSObject, evaluation:(event:Event)->Bool,callback:(event:Event)->Void) ->HandlerCallback? {
         
         if let manager = self.eventManagers[socketEvent] {
-            return  manager.addListener(target,evaluation: evaluation,callback: callback)
+            return  manager.addListener(owner,evaluation: evaluation,callback: callback)
 
         }
         else{
@@ -108,10 +81,20 @@ class SocketManager {
     // TODO: Must implement
     func removeListener(handler:HandlerCallback){
         
-        
     }
-    //TODO: Must implement
+    
     func removeListener(target:AnyObject){
+        
+        for socketEvent:SocketEvent  in self.eventManagers.keys{
+            self.eventManagers[socketEvent]?.removeListener(target)
+        }
+    }
+    
+    func removeListener(socketEvent:SocketEvent , target:AnyObject){
+        
+        if let eventManager = self.eventManagers[socketEvent]{
+            eventManager.removeListener(target)
+        }
         
     }
     
