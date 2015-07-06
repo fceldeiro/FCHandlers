@@ -24,12 +24,12 @@ class SocketViewController: UIViewController {
             return event.payload?.senderName == "Fabian"
             }) { (event:Event) -> Void in
                 
-                if let payload:Payload = event.payload, let senderName:String = payload.senderName{
+                if let payload:Payload = event.payload, let senderName:String = payload.senderName, let payloadData = payload.data{
                     
                     var message = String()
                     message += senderName
                 
-                    switch payload.data{
+                    switch payloadData{
                     case .Text(let text):
                         message+=" "
                         message+=text
@@ -46,12 +46,12 @@ class SocketViewController: UIViewController {
             return event.payload?.senderName == "MisterX"
             }) { (event:Event) -> Void in
                 
-                if let payload:Payload = event.payload, let senderName:String = payload.senderName{
+                if let payload:Payload = event.payload, let senderName:String = payload.senderName, let payloadData = payload.data{
                     
                     var message = String()
                     message += senderName
                 
-                    switch payload.data{
+                    switch payloadData{
                     case .Text(let text):
                         message+=" "
                         message+=text

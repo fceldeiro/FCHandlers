@@ -65,8 +65,8 @@ class EventManagerViewController: UIViewController {
         
         eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
             
-            if let payload:Payload = event.payload{
-                switch payload.data{
+            if let payload:Payload = event.payload, let payloadData = payload.data{
+                switch payloadData{
                 case .Text(let text):
                     return (text == "Custom text");
                 default: return false
@@ -78,8 +78,8 @@ class EventManagerViewController: UIViewController {
             
             }, callback: { (event:Event) -> Void in
 
-                if let payload:Payload = event.payload{
-                    switch payload.data{
+                if let payload:Payload = event.payload, let payloadData = payload.data{
+                    switch payloadData{
                     case .Text(let text):
                     println("Event with data of type PayloadDataText with text Custom text  = \(text) arrived")
                     default:
@@ -94,8 +94,8 @@ class EventManagerViewController: UIViewController {
         eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
             //return true
     
-            if let payload = event.payload{
-                switch payload.data{
+            if let payload = event.payload, let payloadData = payload.data{
+                switch payloadData{
                 case .Image(let url):
                     return true;
                 
@@ -108,8 +108,8 @@ class EventManagerViewController: UIViewController {
             }
             }, callback: { (event:Event) -> Void in
                 
-                if let payload = event.payload{
-                    switch payload.data{
+                if let payload = event.payload, let payloadData = payload.data{
+                    switch payloadData{
                     case .Image(let url):
                         println("Event with data of type PayloadDataImage with imageURL \(url) arrived")
                     

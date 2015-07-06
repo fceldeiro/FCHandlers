@@ -14,20 +14,25 @@ enum PayloadData {
     case Image (url:NSURL)
     case Custom (customPayload:CustomPayloadData)
     
-    func identifier() ->String{
+    func payloadDataType() ->PayloadDataType?{
         
         switch self{
         case .Text(let text):
-            return "text"
+            return PayloadDataType.Text
         case .Image(let url):
-            return "image"
-        case .Custom(let customPayload):
-            return "action"
+            return PayloadDataType.Image
         default:
-            return "undefined"
+            return nil
         }
     }
 }
+
+enum PayloadDataType : String{
+    case Text = "text"
+    case Image = "image"
+}
+
+
 
 //TODO: Parsing playload data
 class Payload{
@@ -40,7 +45,8 @@ class Payload{
     
     let senderIdentifier : String?
     let senderName : String?
-    var data : PayloadData
+    var data : PayloadData?
+    let dataType : PayloadDataType?
     
     
     
@@ -49,7 +55,35 @@ class Payload{
         self.senderIdentifier = json[Payload.kSenderIdentifier].string
         self.senderName = json[Payload.kSenderName].string
         
-        self.data = PayloadData.Text(text: "test")
+        
+        if let dataTypeString = json[Payload.kDataType].string{
+            self.dataType = PayloadDataType(rawValue: dataTypeString)
+        }
+        else{
+            self.dataType = nil
+        }
+        
+        
+        var dataToSet : PayloadData?
+        
+        if let dataType = self.dataType{
+            
+            switch dataType{
+            case .Text:
+                if let data = json[Payload.kData].string{
+                    dataToSet = PayloadData.Text(text: data)
+                }
+            case .Image:
+                if let data = json[Payload.kData].string, let url = NSURL(string: data){
+                    dataToSet = PayloadData.Image(url: url)
+                }
+            
+            default:
+                dataToSet = nil
+            }
+        }
+        
+        self.data = dataToSet
         
     }
     
@@ -57,6 +91,7 @@ class Payload{
         self.senderIdentifier = senderIdentifier;
         self.senderName = senderName;
         self.data = payloadData;
+        self.dataType = payloadData.payloadDataType()
     }
     
     func description()->String{
@@ -69,6 +104,17 @@ class Payload{
         
         if let senderName = self.senderName{
             desc += "\nsenderName:\(senderName)"
+        }
+        
+        if let payloadData = self.data{
+            switch payloadData{
+            case .Text(let text):
+                desc += "\ndata:\(text)"
+            case .Image(let url):
+                desc += "\ndata:\(url)"
+            default:
+                desc += "\ndata: default"
+            }
         }
         
         return desc
@@ -87,6 +133,21 @@ class Payload{
             json[Payload.kSenderName] = senderName
         }
         
+        if let dataType = self.dataType?.rawValue{
+            json[Payload.kDataType] = dataType
+        }
+        
+        
+        if let data = self.data{
+            switch data{
+            case .Text(let text):
+                json[Payload.kData] = text
+            case .Image(let url):
+                json[Payload.kData] = url.absoluteString
+            default:
+                println("data type not valid")
+            }
+        }
         return json
     }
     
