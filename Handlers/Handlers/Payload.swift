@@ -64,11 +64,11 @@ class Payload{
         var desc = String()
         
         if let senderID = self.senderIdentifier{
-            desc += "SenderID:\(senderID) - "
+            desc += "senderIdentifier:\(senderID),"
         }
         
         if let senderName = self.senderName{
-            desc += "SenderName:\(senderName) - "
+            desc += "\nsenderName:\(senderName)"
         }
         
         return desc

@@ -93,19 +93,19 @@ class Event {
         var desc = String()
         
         if let from = self.from{
-            desc += "From:\(from) - "
+            desc += "from:\(from) ,"
         }
         
         if let to = self.to{
-            desc += "To:\(to) - "
+            desc += "\nto:\(to) ,"
         }
         
         if let identifier = self.identifier{
-            desc += "Identifier:\(identifier) - "
+            desc += "\nidentifier:\(identifier) ,"
         }
         
         if let payloadDescription = self.payload?.description(){
-            desc += "Payload:{\n\(payloadDescription)}"
+            desc += "\npayload:{\n\(payloadDescription)\n}"
         }
         
         return desc
