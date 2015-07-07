@@ -33,21 +33,25 @@ class SocketViewController: UIViewController {
         weak var weakSelf  = self;
         
         socketManager.addListener(SocketEvent.Message, owner: socketEventListener, evaluation: { (event:Event) -> Bool in
-            return event.payload?.senderName == "Fabian"
+            
+            return event.payload?.senderName() == "Fabian"
+            
             }) { (event:Event) -> Void in
                 
-                if let payload:Payload = event.payload, let senderName:String = payload.senderName, let payloadData = payload.data{
+                if let payload:PayloadType = event.payload{
                     
-                    var message = String()
-                    message += senderName
+                    var message : String = String()
+                    message += payload.senderName()!
                     
-                    switch payloadData{
-                    case .Text(let text):
-                        message+=" "
-                        message+=text
-                        weakSelf?.labelFabianLastMessage.text = senderName + " : " + message
-                        
-                    default: println("shit happens")
+                    switch payload{
+                    case .Text(payload: let payloadText):
+                        message += " "
+                        message += payloadText!.text!
+                        weakSelf?.labelFabianLastMessage.text = message
+                    case .Image(let payloadImage):
+                        print("TODO")
+                    default:
+                        print("TODO")
                     }
                 }
                 
@@ -55,21 +59,25 @@ class SocketViewController: UIViewController {
         }
         
         socketManager.addListener(SocketEvent.Message, owner: socketEventListener, evaluation: { (event:Event) -> Bool in
-            return event.payload?.senderName == "MisterX"
+            
+            return event.payload?.senderName() == "MisterX"
+            
             }) { (event:Event) -> Void in
                 
-                if let payload:Payload = event.payload, let senderName:String = payload.senderName, let payloadData = payload.data{
+                if let payload:PayloadType = event.payload{
                     
-                    var message = String()
-                    message += senderName
+                    var message : String = String()
+                    message += payload.senderName()!
                     
-                    switch payloadData{
-                    case .Text(let text):
-                        message+=" "
-                        message+=text
-                        weakSelf?.labelMisterXLastMessage.text = senderName + " : " + message
-                        
-                    default: println("shit happens")
+                    switch payload{
+                    case .Text(payload: let payloadText):
+                        message += " "
+                        message += payloadText!.text!
+                        weakSelf?.labelMisterXLastMessage.text = message
+                    case .Image(let payloadImage):
+                        print("TODO")
+                    default:
+                        print("TODO")
                     }
                 }
                 
@@ -96,11 +104,23 @@ class SocketViewController: UIViewController {
     }
     
     @IBAction func buttonMessageFromFabianPressed(sender: UIButton) {
-        socketManager.emit(SocketEvent.Message, payload: Payload(senderIdentifier: "fabi", senderName: "Fabian", payloadData: PayloadData.Text(text: "Como va?")))
+        
+        let payloadText:PayloadText = PayloadText(text: "Como va?")
+        payloadText.senderName = "Fabian"
+        payloadText.senderIdentifier = "fabi"
+        
+        socketManager.emit(SocketEvent.Message, payload: PayloadType.Text(payload: payloadText))
+      //  socketManager.emit(SocketEvent.Message, payload: Payload(senderIdentifier: "fabi", senderName: "Fabian", payloadData: PayloadData.Text(text: "Como va?")))
         
     }
     @IBAction func buttonMessageFromXPressed(sender:UIButton){
-        socketManager.emit(SocketEvent.Message, payload: Payload(senderIdentifier: "mister_x", senderName: "MisterX", payloadData: PayloadData.Text(text: "GATO")))
+        
+        let payloadText:PayloadText = PayloadText(text: "GATO?")
+        payloadText.senderName = "MisterX"
+        payloadText.senderIdentifier = "mister_x"
+        
+        socketManager.emit(SocketEvent.Message, payload: PayloadType.Text(payload: payloadText))
+       // socketManager.emit(SocketEvent.Message, payload: Payload(senderIdentifier: "mister_x", senderName: "MisterX", payloadData: PayloadData.Text(text: "GATO")))
         
     }
     

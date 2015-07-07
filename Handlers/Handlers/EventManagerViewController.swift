@@ -27,8 +27,10 @@ class EventManagerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
     func launchCustomEvents(){
         
+        /*
         var payloadText = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.Text(text: "Custom text"))
         var eventText = Event(identifier:"xxx-text", from: "x", to: "y", payload: payloadText)
         
@@ -43,10 +45,12 @@ class EventManagerViewController: UIViewController {
         eventManager.triggerEvent(eventText)
         eventManager.triggerEvent(eventImage)
         eventManager.triggerEvent(eventCustom)
+        */
 
     }
     func addListeners(){
         
+        /*
         eventManager.addListener(self , evaluation: { (event:Event) -> Bool in
             
             return event.payload?.senderName == "Fabian"
@@ -118,6 +122,8 @@ class EventManagerViewController: UIViewController {
                     }
                 }
         })
+
+        */
         
     }
 

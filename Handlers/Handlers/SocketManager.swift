@@ -98,8 +98,10 @@ class SocketManager {
         
     }
     
-    func emit(socketEvent:SocketEvent, payload:Payload){
-        let event = Event(identifier:"xxx-text", from: "x", to: "y", payload: payload)
+    func emit(socketEvent:SocketEvent, payload:PayloadType){
+        
+        //let event = Event(identifier:"xxx-text", from: "x", to: "y", payload: payload)
+        let event = Event(identifier: "xxx-test", from: "x", to: "y", payload: payload)
         socket.emit(socketEvent.rawValue, event.jsonDictionary())
         
     }

@@ -19,11 +19,11 @@ class Event {
     
     var from : String?
     var to : String?
-    var payload : Payload?
+    var payload : PayloadType?
     var identifier :String?
     
 
-    init(identifier:String, from:String,to:String,payload:Payload){
+    init(identifier:String, from:String,to:String,payload:PayloadType){
        
         self.from = from
         self.to = to
@@ -59,8 +59,20 @@ class Event {
         self.from = json[Event.kFrom].string
         self.to = json[Event.kTo].string
         self.identifier = json[Event.kIdentifier].string
-        self.payload = Payload(json: json[Event.kPayload])
-
+        
+        
+        let payloadJSON = json[Event.kPayload]
+        if let payloadTypeString:String = payloadJSON["type"].string, let payloadTypeKeyEnum:PayloadTypeKey = PayloadTypeKey(rawValue: payloadTypeString){
+            switch payloadTypeKeyEnum{
+            case .Text:
+                self.payload = PayloadType.Text(payload: PayloadText(json: payloadJSON))
+            case .Image:
+                self.payload = PayloadType.Image(payload: PayloadImage(json: payloadJSON))
+            default:
+                self.payload = nil
+                
+            }
+        }
         
     }
     
@@ -80,8 +92,8 @@ class Event {
             json[Event.kIdentifier] = identifier
         }
         
-        if let payload = self.payload{
-            json[Event.kPayload] = payload.jsonDictionary()
+        if let payload = self.payload, let payloadDic = payload.jsonDictionary(){
+            json[Event.kPayload] = payloadDic
         }
         
         return json
@@ -104,9 +116,11 @@ class Event {
             desc += "\nidentifier:\(identifier) ,"
         }
         
+        /*
         if let payloadDescription = self.payload?.description(){
             desc += "\npayload:{\n\(payloadDescription)\n}"
         }
+        */
         
         return desc
         

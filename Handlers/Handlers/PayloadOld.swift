@@ -1,5 +1,5 @@
 //
-//  Payload.swift
+//  PayloadOld.swift
 //  Handlers
 //
 //  Created by Fabian Celdeiro on 7/4/15.
@@ -34,7 +34,7 @@ enum PayloadDataType : String{
 
 
 
-class Payload{
+class PayloadOld{
     
     static let kSenderIdentifier = "sender_identifier"
     static let kSenderName = "sender_name"
@@ -51,11 +51,11 @@ class Payload{
     
     init(json:JSON){
         
-        self.senderIdentifier = json[Payload.kSenderIdentifier].string
-        self.senderName = json[Payload.kSenderName].string
+        self.senderIdentifier = json[PayloadOld.kSenderIdentifier].string
+        self.senderName = json[PayloadOld.kSenderName].string
         
         
-        if let dataTypeString = json[Payload.kDataType].string{
+        if let dataTypeString = json[PayloadOld.kDataType].string{
             self.dataType = PayloadDataType(rawValue: dataTypeString)
         }
         else{
@@ -69,11 +69,11 @@ class Payload{
             
             switch dataType{
             case .Text:
-                if let data = json[Payload.kData].string{
+                if let data = json[PayloadOld.kData].string{
                     dataToSet = PayloadData.Text(text: data)
                 }
             case .Image:
-                if let data = json[Payload.kData].string, let url = NSURL(string: data){
+                if let data = json[PayloadOld.kData].string, let url = NSURL(string: data){
                     dataToSet = PayloadData.Image(url: url)
                 }
             
@@ -125,24 +125,24 @@ class Payload{
         var json = [String:AnyObject]()
         
         if let senderIdentifier = self.senderIdentifier{
-            json[Payload.kSenderIdentifier] = senderIdentifier
+            json[PayloadOld.kSenderIdentifier] = senderIdentifier
         }
         
         if let senderName = self.senderName{
-            json[Payload.kSenderName] = senderName
+            json[PayloadOld.kSenderName] = senderName
         }
         
         if let dataType = self.dataType?.rawValue{
-            json[Payload.kDataType] = dataType
+            json[PayloadOld.kDataType] = dataType
         }
         
         
         if let data = self.data{
             switch data{
             case .Text(let text):
-                json[Payload.kData] = text
+                json[PayloadOld.kData] = text
             case .Image(let url):
-                json[Payload.kData] = url.absoluteString
+                json[PayloadOld.kData] = url.absoluteString
             default:
                 println("data type not valid")
             }
