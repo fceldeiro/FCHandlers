@@ -40,4 +40,8 @@ class PayloadBase {
         
         return dictionary
     }
+    
+    func description() -> String?{
+        return self.jsonDictionary()?.description
+    }
 }

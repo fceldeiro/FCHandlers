@@ -116,11 +116,11 @@ class Event {
             desc += "\nidentifier:\(identifier) ,"
         }
         
-        /*
+        
         if let payloadDescription = self.payload?.description(){
             desc += "\npayload:{\n\(payloadDescription)\n}"
         }
-        */
+        
         
         return desc
         

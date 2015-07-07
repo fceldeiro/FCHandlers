@@ -54,5 +54,18 @@ enum PayloadType {
             
         }
     }
+    
+    func description() -> String? {
+        
+        switch self{
+        case .Text(let payloadText):
+            return payloadText?.description()
+        case .Image(let payloadImage):
+            return payloadImage?.description()
+        default:
+            return nil
+            
+        }
+    }
 }
 
