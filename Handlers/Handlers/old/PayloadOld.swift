@@ -12,7 +12,7 @@ import SwiftyJSON
 enum PayloadData {
     case Text (text:String)
     case Image (url:NSURL)
-    case Custom (customPayload:CustomPayloadData)
+   // case Custom (customPayload:CustomPayloadData)
     
     func payloadDataType() ->PayloadDataType?{
         

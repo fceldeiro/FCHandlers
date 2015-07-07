@@ -80,6 +80,10 @@ class EventManager{
         
         let allObjects:NSArray = self.handlerMapTable.keyEnumerator().allObjects
         
+        
+        /**
+        *  PALOMITAS!!! ver como bajar esto
+        */
         for key in allObjects{
             if let handlerArray:NSMutableArray = self.handlerMapTable.objectForKey(key) as? NSMutableArray{
             

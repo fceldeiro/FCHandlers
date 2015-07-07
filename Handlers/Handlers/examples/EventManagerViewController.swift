@@ -12,6 +12,8 @@ class EventManagerViewController: UIViewController {
 
     var eventManager : EventManager!
     
+    let socketEventListener  = SocketViewControllerSocketEventListener()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,6 +31,15 @@ class EventManagerViewController: UIViewController {
     
     
     func launchCustomEvents(){
+        
+        var payloadText = PayloadText(text: "textDemo")
+        var eventText = Event(identifier: "xxx-test", from: "me", to: "she", payload: PayloadType.Text(payload: payloadText))
+        
+        var payloadImage = PayloadImage(imageURL: NSURL(string: "localhost:30000")!)
+        var eventImage = Event(identifier: "xxx-test-image", from: "me", to: "she", payload: PayloadType.Image(payload: payloadImage))
+        
+        eventManager.triggerEvent(eventText)
+        eventManager.triggerEvent(eventImage)
         
         /*
         var payloadText = Payload(senderIdentifier: "xxx", senderName: "Fabian", payloadData: PayloadData.Text(text: "Custom text"))
@@ -50,80 +61,45 @@ class EventManagerViewController: UIViewController {
     }
     func addListeners(){
         
-        /*
-        eventManager.addListener(self , evaluation: { (event:Event) -> Bool in
+        
+        eventManager.addListener(self.socketEventListener , evaluation: { (event:Event) -> Bool in
             
-            return event.payload?.senderName == "Fabian"
+            return event.from == "me"
             
             }, callback: { (event:Event) -> Void in
-                println("Event with payload.senderName Fabian arrived")
+                println("Event from me arrived")
         });
         
         
         
-        eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
-            return event.payload?.senderName == "Ernesto"
+        eventManager.addListener(self.socketEventListener, evaluation: { (event:Event) -> Bool in
+            return event.from == "she"
             }, callback: { (event:Event) -> Void in
-                println("Event with payload.senderName Ernesto arrived")
+                println("Event from shearrived")
         })
         
-        eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
+        eventManager.addListener(self.socketEventListener, evaluation: { (event:Event) -> Bool in
             
-            if let payload:Payload = event.payload, let payloadData = payload.data{
-                switch payloadData{
-                case .Text(let text):
-                    return (text == "Custom text");
-                default: return false
-                }
-            }
-            else{
-                return false
-            }
-            
-            }, callback: { (event:Event) -> Void in
-
-                if let payload:Payload = event.payload, let payloadData = payload.data{
-                    switch payloadData{
-                    case .Text(let text):
-                    println("Event with data of type PayloadDataText with text Custom text  = \(text) arrived")
-                    default:
-                        println("Do nothing")
+            if let payloadType = event.payload {
+                switch payloadType{
+                case .Text(let payloadText):
+                    if let text = payloadText?.text{
+                        return (text as NSString).containsString("Demo")
                     }
-                }
-                
-                
-        })
-        
-        
-        eventManager.addListener(self, evaluation: { (event:Event) -> Bool in
-            //return true
-    
-            if let payload = event.payload, let payloadData = payload.data{
-                switch payloadData{
-                case .Image(let url):
-                    return true;
-                
+
                 default:
-                    return false;
+                    return false
                 }
             }
-            else{
-                return false
-            }
+            
+            return false
+            
+            
             }, callback: { (event:Event) -> Void in
-                
-                if let payload = event.payload, let payloadData = payload.data{
-                    switch payloadData{
-                    case .Image(let url):
-                        println("Event with data of type PayloadDataImage with imageURL \(url) arrived")
-                    
-                    default:
-                        println("do nothing")
-                    }
-                }
-        })
 
-        */
+                print("Event containing word Demo arrived")
+                
+        })
         
     }
 
