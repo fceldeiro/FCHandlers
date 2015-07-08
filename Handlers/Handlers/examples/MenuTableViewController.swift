@@ -19,4 +19,12 @@ class MenuTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueMenuToSlack"{
+            if let slackController : SlackChatTableViewController = segue.destinationViewController as? SlackChatTableViewController{
+                slackController.targetUserIdentifier = "magoya"
+            }
+        }
+    }
 }

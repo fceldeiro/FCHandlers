@@ -27,6 +27,12 @@
 		CD1066F41B4B7CE9000E88A3 /* PayloadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066E61B4B7CE9000E88A3 /* PayloadType.swift */; };
 		CD1066F51B4B7CE9000E88A3 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066E71B4B7CE9000E88A3 /* SocketManager.swift */; };
 		CD560BC91B4CDBD300531F66 /* MyClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CD560BC81B4CDBD300531F66 /* MyClass.m */; };
+		CD560BCB1B4CE83A00531F66 /* Generics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD560BCA1B4CE83A00531F66 /* Generics.swift */; };
+		CD560BD61B4CF44300531F66 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CD560BCE1B4CF44300531F66 /* Message.m */; };
+		CD560BD71B4CF44300531F66 /* MessageImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD560BD01B4CF44300531F66 /* MessageImageTableViewCell.m */; };
+		CD560BD81B4CF44300531F66 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD560BD21B4CF44300531F66 /* MessageTableViewCell.m */; };
+		CD560BD91B4CF44300531F66 /* MessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD560BD41B4CF44300531F66 /* MessageTextView.m */; };
+		CD560BDA1B4CF44300531F66 /* SlackChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD560BD51B4CF44300531F66 /* SlackChatTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +73,16 @@
 		CD560BC31B4CD63800531F66 /* Handlers-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Handlers-Bridging-Header.h"; sourceTree = "<group>"; };
 		CD560BC71B4CDBD300531F66 /* MyClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClass.h; sourceTree = "<group>"; };
 		CD560BC81B4CDBD300531F66 /* MyClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClass.m; sourceTree = "<group>"; };
+		CD560BCA1B4CE83A00531F66 /* Generics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generics.swift; sourceTree = "<group>"; };
+		CD560BCD1B4CF44300531F66 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		CD560BCE1B4CF44300531F66 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		CD560BCF1B4CF44300531F66 /* MessageImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageImageTableViewCell.h; sourceTree = "<group>"; };
+		CD560BD01B4CF44300531F66 /* MessageImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageImageTableViewCell.m; sourceTree = "<group>"; };
+		CD560BD11B4CF44300531F66 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
+		CD560BD21B4CF44300531F66 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
+		CD560BD31B4CF44300531F66 /* MessageTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTextView.h; sourceTree = "<group>"; };
+		CD560BD41B4CF44300531F66 /* MessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTextView.m; sourceTree = "<group>"; };
+		CD560BD51B4CF44300531F66 /* SlackChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackChatTableViewController.swift; sourceTree = "<group>"; };
 		EAFD0E6ED2C9C58B9D8622DE /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -131,6 +147,7 @@
 			children = (
 				CD1066D71B4B7CE9000E88A3 /* examples */,
 				CD1066DD1B4B7CE9000E88A3 /* old */,
+				CD560BCC1B4CF44300531F66 /* prototype */,
 				CD1066DF1B4B7CE9000E88A3 /* src */,
 				CD0D6A0E1B48346B00F0D27A /* Main.storyboard */,
 				CD0D6A111B48346B00F0D27A /* Images.xcassets */,
@@ -199,8 +216,25 @@
 				CD1066E61B4B7CE9000E88A3 /* PayloadType.swift */,
 				CD1066E71B4B7CE9000E88A3 /* SocketManager.swift */,
 				CD560BC31B4CD63800531F66 /* Handlers-Bridging-Header.h */,
+				CD560BCA1B4CE83A00531F66 /* Generics.swift */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		CD560BCC1B4CF44300531F66 /* prototype */ = {
+			isa = PBXGroup;
+			children = (
+				CD560BCD1B4CF44300531F66 /* Message.h */,
+				CD560BCE1B4CF44300531F66 /* Message.m */,
+				CD560BCF1B4CF44300531F66 /* MessageImageTableViewCell.h */,
+				CD560BD01B4CF44300531F66 /* MessageImageTableViewCell.m */,
+				CD560BD11B4CF44300531F66 /* MessageTableViewCell.h */,
+				CD560BD21B4CF44300531F66 /* MessageTableViewCell.m */,
+				CD560BD31B4CF44300531F66 /* MessageTextView.h */,
+				CD560BD41B4CF44300531F66 /* MessageTextView.m */,
+				CD560BD51B4CF44300531F66 /* SlackChatTableViewController.swift */,
+			);
+			path = prototype;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,20 +390,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD1066ED1B4B7CE9000E88A3 /* PayloadOld.swift in Sources */,
+				CD560BD81B4CF44300531F66 /* MessageTableViewCell.m in Sources */,
 				CD1066F21B4B7CE9000E88A3 /* PayloadImage.swift in Sources */,
 				CD1066F51B4B7CE9000E88A3 /* SocketManager.swift in Sources */,
 				CD1066EC1B4B7CE9000E88A3 /* SocketViewControllerSocketEventListener.swift in Sources */,
+				CD560BD91B4CF44300531F66 /* MessageTextView.m in Sources */,
 				CD1066F31B4B7CE9000E88A3 /* PayloadText.swift in Sources */,
 				CD1066EF1B4B7CE9000E88A3 /* EventManager.swift in Sources */,
+				CD560BDA1B4CF44300531F66 /* SlackChatTableViewController.swift in Sources */,
 				CD1066E91B4B7CE9000E88A3 /* EventManagerViewController.swift in Sources */,
 				CD1066EB1B4B7CE9000E88A3 /* SocketViewController.swift in Sources */,
 				CD1066F11B4B7CE9000E88A3 /* PayloadBase.swift in Sources */,
+				CD560BCB1B4CE83A00531F66 /* Generics.swift in Sources */,
 				CD1066E81B4B7CE9000E88A3 /* AppDelegate.swift in Sources */,
 				CD1066F41B4B7CE9000E88A3 /* PayloadType.swift in Sources */,
 				CD1066EE1B4B7CE9000E88A3 /* Event.swift in Sources */,
+				CD560BD61B4CF44300531F66 /* Message.m in Sources */,
 				CD560BC91B4CDBD300531F66 /* MyClass.m in Sources */,
 				CD1066EA1B4B7CE9000E88A3 /* MenuTableViewController.swift in Sources */,
 				CD1066F01B4B7CE9000E88A3 /* HandlerCallback.swift in Sources */,
+				CD560BD71B4CF44300531F66 /* MessageImageTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

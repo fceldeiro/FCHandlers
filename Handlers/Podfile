@@ -4,3 +4,6 @@ use_frameworks!
 
 pod 'Socket.IO-Client-Swift'
 pod 'SwiftyJSON'
+pod 'SlackTextViewController'
+pod 'LoremIpsum', '~> 1.0'
+pod 'SDWebImage'

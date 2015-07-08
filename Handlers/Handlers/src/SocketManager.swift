@@ -20,12 +20,11 @@ enum SocketEvent: String{
 class SocketManager {
     
     private let socket:SocketIOClient
-    private var eventManagers : Dictionary<SocketEvent,EventManager>
+    private lazy var eventManagers : Dictionary<SocketEvent,EventManager> = Dictionary()
     
     init(url:String){
         
         self.socket = SocketIOClient(socketURL: url)
-        self.eventManagers = Dictionary()
         self.addHandlers()
         
     }
@@ -66,7 +65,7 @@ class SocketManager {
         socket.close(fast: false)
     }
     
-    func addListener(socketEvent:SocketEvent, owner:NSObject, evaluation:(event:Event)->Bool,callback:(event:Event)->Void) ->HandlerCallback? {
+    func addListener(socketEvent:SocketEvent, owner:NSObject, evaluation:(event:Event)->Bool,callback:(event:Event)->Void) ->HandlerCallback?{
         
         if let manager = self.eventManagers[socketEvent] {
             return  manager.addListener(owner,evaluation: evaluation,callback: callback)
@@ -98,6 +97,9 @@ class SocketManager {
         
     }
     
+    func emit(socketEvent:SocketEvent, event:Event){
+        socket.emit(socketEvent.rawValue, event.jsonDictionary())
+    }
     func emit(socketEvent:SocketEvent, payload:PayloadType){
         
         //let event = Event(identifier:"xxx-text", from: "x", to: "y", payload: payload)

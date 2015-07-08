@@ -50,6 +50,23 @@
                                             <segue destination="LQo-Rv-G6l" kind="show" id="Wgq-GX-GLp"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Thu-Ka-9Lp" style="IBUITableViewCellStyleDefault" id="x3m-7Y-2Or">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x3m-7Y-2Or" id="ZDE-pg-Npv">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Example Slack with Socket" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Thu-Ka-9Lp">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="7Dh-tf-9c4" kind="show" identifier="segueMenuToSlack" id="Tvr-QE-8j9"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -203,7 +220,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eFG-1i-cAQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="704" y="345"/>
+            <point key="canvasLocation" x="704" y="295"/>
+        </scene>
+        <!--Slack Chat Table View Controller-->
+        <scene sceneID="5ix-RO-Jo9">
+            <objects>
+                <viewController id="7Dh-tf-9c4" customClass="SlackChatTableViewController" customModule="Handlers" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="p7Z-Yd-mTi"/>
+                        <viewControllerLayoutGuide type="bottom" id="jIq-NF-VdV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A6Q-t7-9ZX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7z9-6m-ANr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="844" y="883"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pv2-Yp-23S">

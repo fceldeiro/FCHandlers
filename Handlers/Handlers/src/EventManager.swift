@@ -11,13 +11,8 @@ import Foundation
 
 class EventManager{
 
-    let handlerMapTable : NSMapTable;
+    let handlerMapTable : NSMapTable = NSMapTable(keyOptions: NSPointerFunctionsWeakMemory, valueOptions: NSPointerFunctionsStrongMemory)
     
-    init() {
-  
-        self.handlerMapTable = NSMapTable(keyOptions: NSPointerFunctionsWeakMemory, valueOptions: NSPointerFunctionsStrongMemory)
-    }
-
     
     func addListener(owner:NSObject, evaluation:(event:Event)->Bool,callback:(event:Event)->Void) ->HandlerCallback{
         

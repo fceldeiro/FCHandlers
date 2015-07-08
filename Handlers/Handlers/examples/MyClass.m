@@ -12,8 +12,6 @@
 
 @implementation MyClass
 -(void) test{
-    PayloadBase * payload = [[PayloadBase alloc] init];
-    payload.description;
-
+    
 }
 @end
