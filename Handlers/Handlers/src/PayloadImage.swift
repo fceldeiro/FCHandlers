@@ -30,12 +30,12 @@ class PayloadImage: PayloadBase {
         super.init(json: json)
     }
     
-    override func jsonDictionary() -> Dictionary<String,AnyObject>?{
+    override func jsonDictionary() -> Dictionary<String,AnyObject>{
         
         
-        var  superDictionary:Dictionary<String,AnyObject>? = super.jsonDictionary()
-        if (superDictionary != nil){
-            superDictionary!["image"] = self.imageURL?.absoluteString
+        var  superDictionary = super.jsonDictionary()
+        if let absoluteStringURL = self.imageURL?.absoluteString{
+            superDictionary["image"] = absoluteStringURL
         }
         
         return superDictionary

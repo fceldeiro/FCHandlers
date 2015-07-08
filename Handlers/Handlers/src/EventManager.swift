@@ -33,7 +33,7 @@ class EventManager{
             println("no handlers")
         }
 
-        
+
         //new
         if  (self.handlerMapTable.objectForKey(owner) != nil){
             if let handlers:NSMutableArray = self.handlerMapTable.objectForKey(owner) as? NSMutableArray{
@@ -48,6 +48,9 @@ class EventManager{
         }
         
         //How many do i have after doing my logic
+        
+               
+        
         if let handlers:NSMutableArray = self.handlerMapTable.objectForKey(owner) as? NSMutableArray {
             println("Handlers count after \(handlers.count)")
         }
@@ -58,6 +61,7 @@ class EventManager{
 
     // TODO: Must implement
     func removeListener(handler:HandlerCallback){
+        
         
 
     }
@@ -74,7 +78,7 @@ class EventManager{
         /// Reviso todos los handlers
         println("")
         println("Triggering event:");
-        println(newEvent.description());
+        println(newEvent.description);
         println("")
         
         

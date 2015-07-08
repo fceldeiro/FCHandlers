@@ -26,6 +26,7 @@
 		CD1066F31B4B7CE9000E88A3 /* PayloadText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066E51B4B7CE9000E88A3 /* PayloadText.swift */; };
 		CD1066F41B4B7CE9000E88A3 /* PayloadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066E61B4B7CE9000E88A3 /* PayloadType.swift */; };
 		CD1066F51B4B7CE9000E88A3 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066E71B4B7CE9000E88A3 /* SocketManager.swift */; };
+		CD560BC91B4CDBD300531F66 /* MyClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CD560BC81B4CDBD300531F66 /* MyClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,9 @@
 		CD1066E51B4B7CE9000E88A3 /* PayloadText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayloadText.swift; sourceTree = "<group>"; };
 		CD1066E61B4B7CE9000E88A3 /* PayloadType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayloadType.swift; sourceTree = "<group>"; };
 		CD1066E71B4B7CE9000E88A3 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		CD560BC31B4CD63800531F66 /* Handlers-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Handlers-Bridging-Header.h"; sourceTree = "<group>"; };
+		CD560BC71B4CDBD300531F66 /* MyClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClass.h; sourceTree = "<group>"; };
+		CD560BC81B4CDBD300531F66 /* MyClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClass.m; sourceTree = "<group>"; };
 		EAFD0E6ED2C9C58B9D8622DE /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -169,6 +173,8 @@
 				CD1066DA1B4B7CE9000E88A3 /* MenuTableViewController.swift */,
 				CD1066DB1B4B7CE9000E88A3 /* SocketViewController.swift */,
 				CD1066DC1B4B7CE9000E88A3 /* SocketViewControllerSocketEventListener.swift */,
+				CD560BC71B4CDBD300531F66 /* MyClass.h */,
+				CD560BC81B4CDBD300531F66 /* MyClass.m */,
 			);
 			path = examples;
 			sourceTree = "<group>";
@@ -192,6 +198,7 @@
 				CD1066E51B4B7CE9000E88A3 /* PayloadText.swift */,
 				CD1066E61B4B7CE9000E88A3 /* PayloadType.swift */,
 				CD1066E71B4B7CE9000E88A3 /* SocketManager.swift */,
+				CD560BC31B4CD63800531F66 /* Handlers-Bridging-Header.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -360,6 +367,7 @@
 				CD1066E81B4B7CE9000E88A3 /* AppDelegate.swift in Sources */,
 				CD1066F41B4B7CE9000E88A3 /* PayloadType.swift in Sources */,
 				CD1066EE1B4B7CE9000E88A3 /* Event.swift in Sources */,
+				CD560BC91B4CDBD300531F66 /* MyClass.m in Sources */,
 				CD1066EA1B4B7CE9000E88A3 /* MenuTableViewController.swift in Sources */,
 				CD1066F01B4B7CE9000E88A3 /* HandlerCallback.swift in Sources */,
 			);
@@ -490,10 +498,13 @@
 			baseConfigurationReference = AF7D7AEAD62A4904F6A1DC20 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Handlers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fabianceldeiro.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Handlers/src/Handlers-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -502,10 +513,12 @@
 			baseConfigurationReference = 52DB28DE79BE16ED2D9E87D7 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Handlers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fabianceldeiro.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Handlers/src/Handlers-Bridging-Header.h";
 			};
 			name = Release;
 		};

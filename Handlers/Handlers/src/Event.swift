@@ -100,29 +100,31 @@ class Event {
     }
 
     
-    
-    func description() -> String{
-        var desc = String()
-        
-        if let from = self.from{
-            desc += "from:\(from) ,"
+    var description : String {
+        get {
+            
+            var desc = String()
+            
+            if let from = self.from{
+                desc += "from:\(from) ,"
+            }
+            
+            if let to = self.to{
+                desc += "\nto:\(to) ,"
+            }
+            
+            if let identifier = self.identifier{
+                desc += "\nidentifier:\(identifier) ,"
+            }
+            
+            
+            if let payloadDescription = self.payload?.description(){
+                desc += "\npayload:{\n\(payloadDescription)\n}"
+            }
+            
+            
+            return desc
         }
-        
-        if let to = self.to{
-            desc += "\nto:\(to) ,"
-        }
-        
-        if let identifier = self.identifier{
-            desc += "\nidentifier:\(identifier) ,"
-        }
-        
-        
-        if let payloadDescription = self.payload?.description(){
-            desc += "\npayload:{\n\(payloadDescription)\n}"
-        }
-        
-        
-        return desc
-        
     }
+    
 }

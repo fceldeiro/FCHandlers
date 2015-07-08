@@ -9,7 +9,8 @@
 import UIKit
 import SwiftyJSON
 
-class PayloadBase {
+
+class PayloadBase : NSObject {
     let type :String
     var senderIdentifier : String? //Variable de prueba
     var senderName : String? //variable de prueba
@@ -24,7 +25,7 @@ class PayloadBase {
 
     }
     
-    func jsonDictionary() -> Dictionary<String,AnyObject>?{
+    func jsonDictionary() -> Dictionary<String,AnyObject>{
         
         var dictionary: Dictionary<String,AnyObject> = Dictionary<String,AnyObject>()
         
@@ -41,7 +42,10 @@ class PayloadBase {
         return dictionary
     }
     
-    func description() -> String?{
-        return self.jsonDictionary()?.description
+    override var  description: String{
+        get {
+            return self.jsonDictionary().description
+        }
     }
+   
 }

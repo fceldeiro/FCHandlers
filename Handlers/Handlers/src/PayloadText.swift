@@ -23,14 +23,13 @@ class PayloadText: PayloadBase {
         super.init(json:json)
     }
     
-    override func jsonDictionary() -> Dictionary<String,AnyObject>?{
-        
 
-        var  superDictionary:Dictionary<String,AnyObject>? = super.jsonDictionary()
-        if (superDictionary != nil){
-            superDictionary!["text"] = self.text
-        }
+    override func jsonDictionary() -> Dictionary<String,AnyObject>{
         
+        var  superDictionary = super.jsonDictionary()
+        if let text = self.text{
+            superDictionary["text"] = text
+        }
         return superDictionary
 
     }
