@@ -11,17 +11,15 @@ import SlackTextViewController
 import SDWebImage
 
 class SlackChatTableViewController: SLKTextViewController {
-
-    
-    let socketManager = SocketManager(url: "localhost:30000")
     
     static let kCellIdentifierMessenger = "kCellIdentifierMessenger"
     static let kCellIdentifierImage = "kCellIdentifierImage"
     static let kCellIdentifierAutoCompletion = "kCellIdentifierAutoCompletion"
 
+    let socketManager = SocketManager(url: "localhost:30000")
     var targetUserIdentifier:String?
     
-    var messages : Array<Event>
+    var messages : Array<SocketEvent>
     
     init(){
         self.messages = []
@@ -62,7 +60,7 @@ class SlackChatTableViewController: SLKTextViewController {
        
         weak var weakSelf  = self;
         
-        socketManager.addListener( SocketEvent.Message, owner: self, evaluation: { (event:Event) -> Bool in
+        socketManager.addListener( SocketEventType.Message, owner: self, evaluation: { (event:SocketEvent) -> Bool in
             return true
         }) { (event) -> Void in
             weakSelf?.insertEvent(event)
@@ -103,7 +101,7 @@ class SlackChatTableViewController: SLKTextViewController {
     }
     
 
-    func insertEvent(message:Event){
+    func insertEvent(message:SocketEvent){
         
 
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
@@ -132,10 +130,10 @@ class SlackChatTableViewController: SLKTextViewController {
        
         let payloadImage = PayloadType.Image(payload: PayloadImage(imageURL: NSURL(string: "http://orig09.deviantart.net/b529/f/2013/284/9/1/vegeta_el_principe_saiyajin_by_salvamakoto-d6q1rtm.png")!))
         
-        let event = Event(identifier: "me", from: "Fabian", to: self.targetUserIdentifier!, payload: payloadImage)
+        let event = SocketEvent(identifier: "me", from: "Fabian", to: self.targetUserIdentifier!, payload: payloadImage)
         
      //   insertEvent(event)
-        socketManager.emit(SocketEvent.Message, event: event)
+        socketManager.emit(SocketEventType.Message, event: event)
         
         super.didPressLeftButton(sender)
 
@@ -147,11 +145,11 @@ class SlackChatTableViewController: SLKTextViewController {
         self.textView .refreshFirstResponder()
         
         let payloadText = PayloadType.Text(payload: PayloadText(text: textView.text))
-        let event = Event(identifier: "me", from: "Fabian", to: self.targetUserIdentifier!, payload: payloadText)
+        let event = SocketEvent(identifier: "me", from: "Fabian", to: self.targetUserIdentifier!, payload: payloadText)
         
        // insertEvent(event)
        
-        socketManager.emit(SocketEvent.Message, event: event)
+        socketManager.emit(SocketEventType.Message, event: event)
         
         super.didPressRightButton(sender)
         

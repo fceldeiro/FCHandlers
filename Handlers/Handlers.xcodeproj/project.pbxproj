@@ -18,7 +18,7 @@
 		CD1066EB1B4B7CE9000E88A3 /* SocketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066DB1B4B7CE9000E88A3 /* SocketViewController.swift */; };
 		CD1066EC1B4B7CE9000E88A3 /* SocketViewControllerSocketEventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066DC1B4B7CE9000E88A3 /* SocketViewControllerSocketEventListener.swift */; };
 		CD1066ED1B4B7CE9000E88A3 /* PayloadOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066DE1B4B7CE9000E88A3 /* PayloadOld.swift */; };
-		CD1066EE1B4B7CE9000E88A3 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066E01B4B7CE9000E88A3 /* Event.swift */; };
+		CD1066EE1B4B7CE9000E88A3 /* SocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066E01B4B7CE9000E88A3 /* SocketEvent.swift */; };
 		CD1066EF1B4B7CE9000E88A3 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066E11B4B7CE9000E88A3 /* EventManager.swift */; };
 		CD1066F01B4B7CE9000E88A3 /* HandlerCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066E21B4B7CE9000E88A3 /* HandlerCallback.swift */; };
 		CD1066F11B4B7CE9000E88A3 /* PayloadBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1066E31B4B7CE9000E88A3 /* PayloadBase.swift */; };
@@ -62,7 +62,7 @@
 		CD1066DB1B4B7CE9000E88A3 /* SocketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketViewController.swift; sourceTree = "<group>"; };
 		CD1066DC1B4B7CE9000E88A3 /* SocketViewControllerSocketEventListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketViewControllerSocketEventListener.swift; sourceTree = "<group>"; };
 		CD1066DE1B4B7CE9000E88A3 /* PayloadOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayloadOld.swift; sourceTree = "<group>"; };
-		CD1066E01B4B7CE9000E88A3 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		CD1066E01B4B7CE9000E88A3 /* SocketEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEvent.swift; sourceTree = "<group>"; };
 		CD1066E11B4B7CE9000E88A3 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		CD1066E21B4B7CE9000E88A3 /* HandlerCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandlerCallback.swift; sourceTree = "<group>"; };
 		CD1066E31B4B7CE9000E88A3 /* PayloadBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayloadBase.swift; sourceTree = "<group>"; };
@@ -207,7 +207,6 @@
 		CD1066DF1B4B7CE9000E88A3 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				CD1066E01B4B7CE9000E88A3 /* Event.swift */,
 				CD1066E11B4B7CE9000E88A3 /* EventManager.swift */,
 				CD1066E21B4B7CE9000E88A3 /* HandlerCallback.swift */,
 				CD1066E31B4B7CE9000E88A3 /* PayloadBase.swift */,
@@ -215,6 +214,7 @@
 				CD1066E51B4B7CE9000E88A3 /* PayloadText.swift */,
 				CD1066E61B4B7CE9000E88A3 /* PayloadType.swift */,
 				CD1066E71B4B7CE9000E88A3 /* SocketManager.swift */,
+				CD1066E01B4B7CE9000E88A3 /* SocketEvent.swift */,
 				CD560BC31B4CD63800531F66 /* Handlers-Bridging-Header.h */,
 				CD560BCA1B4CE83A00531F66 /* Generics.swift */,
 			);
@@ -404,7 +404,7 @@
 				CD560BCB1B4CE83A00531F66 /* Generics.swift in Sources */,
 				CD1066E81B4B7CE9000E88A3 /* AppDelegate.swift in Sources */,
 				CD1066F41B4B7CE9000E88A3 /* PayloadType.swift in Sources */,
-				CD1066EE1B4B7CE9000E88A3 /* Event.swift in Sources */,
+				CD1066EE1B4B7CE9000E88A3 /* SocketEvent.swift in Sources */,
 				CD560BD61B4CF44300531F66 /* Message.m in Sources */,
 				CD560BC91B4CDBD300531F66 /* MyClass.m in Sources */,
 				CD1066EA1B4B7CE9000E88A3 /* MenuTableViewController.swift in Sources */,

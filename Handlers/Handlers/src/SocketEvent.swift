@@ -1,5 +1,5 @@
 //
-//  Event.swift
+//  SocketEvent
 //  Handlers
 //
 //  Created by Fabian Celdeiro on 7/4/15.
@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Event {
+class SocketEvent {
     
     static let kFrom = "from"
     static let kTo = "to"
@@ -34,20 +34,20 @@ class Event {
     
     init(dictionary:[String:AnyObject]){
         
-        if let from = dictionary[Event.kFrom] as? String{
+        if let from = dictionary[SocketEvent.kFrom] as? String{
             self.from = from
             
         }
         
-        if let to = dictionary[Event.kTo] as? String{
+        if let to = dictionary[SocketEvent.kTo] as? String{
             self.to = to
         }
         
-        if let identifier = dictionary[Event.kIdentifier] as? String{
+        if let identifier = dictionary[SocketEvent.kIdentifier] as? String{
             self.identifier = identifier
         }
         
-        if let payload = dictionary[Event.kPayload] as? [String:AnyObject]{
+        if let payload = dictionary[SocketEvent.kPayload] as? [String:AnyObject]{
             
         }
 
@@ -56,12 +56,12 @@ class Event {
     init(json:JSON){
         
 
-        self.from = json[Event.kFrom].string
-        self.to = json[Event.kTo].string
-        self.identifier = json[Event.kIdentifier].string
+        self.from = json[SocketEvent.kFrom].string
+        self.to = json[SocketEvent.kTo].string
+        self.identifier = json[SocketEvent.kIdentifier].string
         
         
-        let payloadJSON = json[Event.kPayload]
+        let payloadJSON = json[SocketEvent.kPayload]
         if let payloadTypeString:String = payloadJSON["type"].string, let payloadTypeKeyEnum:PayloadTypeKey = PayloadTypeKey(rawValue: payloadTypeString){
             switch payloadTypeKeyEnum{
             case .Text:
@@ -81,19 +81,19 @@ class Event {
         var json = [String:AnyObject]()
         
         if let from = self.from{
-            json[Event.kFrom] = from
+            json[SocketEvent.kFrom] = from
         }
         
         if let to = self.to{
-            json[Event.kTo] = to
+            json[SocketEvent.kTo] = to
         }
         
         if let identifier = self.identifier{
-            json[Event.kIdentifier] = identifier
+            json[SocketEvent.kIdentifier] = identifier
         }
         
         if let payload = self.payload, let payloadDic = payload.jsonDictionary(){
-            json[Event.kPayload] = payloadDic
+            json[SocketEvent.kPayload] = payloadDic
         }
         
         return json

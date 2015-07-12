@@ -10,7 +10,7 @@ import UIKit
 
 class EventManagerViewController: UIViewController {
 
-    var eventManager : EventManager!
+    let eventManager  = EventManager<SocketEvent>()
     
     let socketEventListener  = SocketViewControllerSocketEventListener()
     
@@ -18,7 +18,6 @@ class EventManagerViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.eventManager = EventManager()
         addListeners()
         launchCustomEvents()
         
@@ -33,10 +32,10 @@ class EventManagerViewController: UIViewController {
     func launchCustomEvents(){
         
         var payloadText = PayloadText(text: "textDemo")
-        var eventText = Event(identifier: "xxx-test", from: "me", to: "she", payload: PayloadType.Text(payload: payloadText))
+        var eventText = SocketEvent(identifier: "xxx-test", from: "me", to: "she", payload: PayloadType.Text(payload: payloadText))
         
         var payloadImage = PayloadImage(imageURL: NSURL(string: "localhost:30000")!)
-        var eventImage = Event(identifier: "xxx-test-image", from: "me", to: "she", payload: PayloadType.Image(payload: payloadImage))
+        var eventImage = SocketEvent(identifier: "xxx-test-image", from: "me", to: "she", payload: PayloadType.Image(payload: payloadImage))
         
         eventManager.triggerEvent(eventText)
         eventManager.triggerEvent(eventImage)
@@ -62,23 +61,25 @@ class EventManagerViewController: UIViewController {
     func addListeners(){
         
         
-        eventManager.addListener(self.socketEventListener , evaluation: { (event:Event) -> Bool in
+        var array = Array<Int>()
+        
+        eventManager.addListener(self.socketEventListener , evaluation: { (event:SocketEvent) -> Bool in
             
             return event.from == "me"
             
-            }, callback: { (event:Event) -> Void in
+            }, callback: { (event:SocketEvent) -> Void in
                 println("Event from me arrived")
         });
         
         
         
-        eventManager.addListener(self.socketEventListener, evaluation: { (event:Event) -> Bool in
+        eventManager.addListener(self.socketEventListener, evaluation: { (event:SocketEvent) -> Bool in
             return event.from == "she"
-            }, callback: { (event:Event) -> Void in
+            }, callback: { (event:SocketEvent) -> Void in
                 println("Event from shearrived")
         })
         
-        eventManager.addListener(self.socketEventListener, evaluation: { (event:Event) -> Bool in
+        eventManager.addListener(self.socketEventListener, evaluation: { (event:SocketEvent) -> Bool in
             
             if let payloadType = event.payload {
                 switch payloadType{
@@ -95,7 +96,7 @@ class EventManagerViewController: UIViewController {
             return false
             
             
-            }, callback: { (event:Event) -> Void in
+            }, callback: { (event:SocketEvent) -> Void in
 
                 print("Event containing word Demo arrived")
                 

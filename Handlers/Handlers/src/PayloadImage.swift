@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class PayloadImage: PayloadBase {
+class  PayloadImage: PayloadBase {
     let imageURL: NSURL?
     
     init (imageURL:NSURL){

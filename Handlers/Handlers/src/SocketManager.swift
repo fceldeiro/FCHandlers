@@ -11,7 +11,7 @@ import Socket_IO_Client_Swift
 import SwiftyJSON
 
 
-enum SocketEvent: String{
+enum SocketEventType: String{
     case Connect = "connect"
     case Message = "message"
     case Error = "error"
@@ -20,7 +20,8 @@ enum SocketEvent: String{
 class SocketManager {
     
     private let socket:SocketIOClient
-    private lazy var eventManagers : Dictionary<SocketEvent,EventManager> = Dictionary()
+    private lazy var eventManagers  = Dictionary<SocketEventType,EventManager<SocketEvent>>()
+    
     
     init(url:String){
         
@@ -31,29 +32,29 @@ class SocketManager {
     
     private func addHandlers(){
         
-        eventManagers[SocketEvent.Connect] = EventManager()
-        socket.on(SocketEvent.Connect.rawValue) { data, ack in
+        eventManagers[SocketEventType.Connect] = EventManager<SocketEvent>()
+        socket.on(SocketEventType.Connect.rawValue) { data, ack in
             
            println("Socket connected")
             
         }
         
-        eventManagers[SocketEvent.Message] = EventManager()
-        socket.on(SocketEvent.Message.rawValue) { data, ack in
+        eventManagers[SocketEventType.Message] = EventManager<SocketEvent>()
+        socket.on(SocketEventType.Message.rawValue) { data, ack in
             
             
             if let eventDictionary: AnyObject = data!.lastObject{
                 let json = JSON(eventDictionary)
                 
-                let event: Event = Event(json: json)
-                if let eventManager = self.eventManagers[SocketEvent.Message]{
+                let event: SocketEvent = SocketEvent(json: json)
+                if let eventManager = self.eventManagers[SocketEventType.Message]{
                     eventManager.triggerEvent(event)
                 }
             }
         }
         
-        eventManagers[SocketEvent.Error] = EventManager()
-        socket.on(SocketEvent.Error.rawValue) { data, ack in
+        eventManagers[SocketEventType.Error] = EventManager<SocketEvent>()
+        socket.on(SocketEventType.Error.rawValue) { data, ack in
             
         }
     }
@@ -65,9 +66,9 @@ class SocketManager {
         socket.close(fast: false)
     }
     
-    func addListener(socketEvent:SocketEvent, owner:NSObject, evaluation:(event:Event)->Bool,callback:(event:Event)->Void) ->HandlerCallback?{
+    func addListener(socketEventType:SocketEventType, owner:NSObject, evaluation:(event:SocketEvent)->Bool,callback:(event:SocketEvent)->Void) ->HandlerCallback<SocketEvent>?{
         
-        if let manager = self.eventManagers[socketEvent] {
+        if let manager:EventManager<SocketEvent> = self.eventManagers[socketEventType] {
             return  manager.addListener(owner,evaluation: evaluation,callback: callback)
 
         }
@@ -78,33 +79,34 @@ class SocketManager {
     }
     
     // TODO: Must implement
-    func removeListener(handler:HandlerCallback){
+    func removeListener(handler:HandlerCallback<SocketEvent>){
         
     }
     
-    func removeListener(target:AnyObject){
+    func removeListener(target:NSObject){
         
-        for socketEvent:SocketEvent  in self.eventManagers.keys{
-            self.eventManagers[socketEvent]?.removeListener(target)
+        for socketEventType:SocketEventType  in self.eventManagers.keys{
+            removeListener(socketEventType, target: target)
         }
     }
     
-    func removeListener(socketEvent:SocketEvent , target:AnyObject){
+    func removeListener(socketEventType:SocketEventType , target:NSObject){
         
-        if let eventManager = self.eventManagers[socketEvent]{
+        if let eventManager = self.eventManagers[socketEventType]{
             eventManager.removeListener(target)
         }
         
     }
     
-    func emit(socketEvent:SocketEvent, event:Event){
-        socket.emit(socketEvent.rawValue, event.jsonDictionary())
+    func emit(socketEventType:SocketEventType, event:SocketEvent){
+        socket.emit(socketEventType.rawValue, event.jsonDictionary())
     }
-    func emit(socketEvent:SocketEvent, payload:PayloadType){
+    func emit(socketEventType:SocketEventType, payload:PayloadType) -> SocketEvent{
         
         //let event = Event(identifier:"xxx-text", from: "x", to: "y", payload: payload)
-        let event = Event(identifier: "xxx-test", from: "x", to: "y", payload: payload)
-        socket.emit(socketEvent.rawValue, event.jsonDictionary())
+        let event = SocketEvent(identifier: "xxx-test", from: "x", to: "y", payload: payload)
+        socket.emit(socketEventType.rawValue, event.jsonDictionary())
+        return event
         
     }
     

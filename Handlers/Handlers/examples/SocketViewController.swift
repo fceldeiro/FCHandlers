@@ -32,11 +32,11 @@ class SocketViewController: UIViewController {
         
         weak var weakSelf  = self;
         
-        socketManager.addListener(SocketEvent.Message, owner: socketEventListener, evaluation: { (event:Event) -> Bool in
+        socketManager.addListener(SocketEventType.Message, owner: socketEventListener, evaluation: { (event:SocketEvent) -> Bool in
             
             return event.payload?.senderName() == "Fabian"
             
-            }) { (event:Event) -> Void in
+            }) { (event:SocketEvent) -> Void in
                 
                 if let payload:PayloadType = event.payload{
                     
@@ -58,11 +58,11 @@ class SocketViewController: UIViewController {
                 
         }
         
-        socketManager.addListener(SocketEvent.Message, owner: socketEventListener, evaluation: { (event:Event) -> Bool in
+        socketManager.addListener(SocketEventType.Message, owner: socketEventListener, evaluation: { (event:SocketEvent) -> Bool in
             
             return event.payload?.senderName() == "MisterX"
             
-            }) { (event:Event) -> Void in
+            }) { (event:SocketEvent) -> Void in
                 
                 if let payload:PayloadType = event.payload{
                     
@@ -109,7 +109,7 @@ class SocketViewController: UIViewController {
         payloadText.senderName = "Fabian"
         payloadText.senderIdentifier = "fabi"
         
-        socketManager.emit(SocketEvent.Message, payload: PayloadType.Text(payload: payloadText))
+        socketManager.emit(SocketEventType.Message, payload: PayloadType.Text(payload: payloadText))
       //  socketManager.emit(SocketEvent.Message, payload: Payload(senderIdentifier: "fabi", senderName: "Fabian", payloadData: PayloadData.Text(text: "Como va?")))
         
     }
@@ -119,7 +119,7 @@ class SocketViewController: UIViewController {
         payloadText.senderName = "MisterX"
         payloadText.senderIdentifier = "mister_x"
         
-        socketManager.emit(SocketEvent.Message, payload: PayloadType.Text(payload: payloadText))
+        socketManager.emit(SocketEventType.Message, payload: PayloadType.Text(payload: payloadText))
        // socketManager.emit(SocketEvent.Message, payload: Payload(senderIdentifier: "mister_x", senderName: "MisterX", payloadData: PayloadData.Text(text: "GATO")))
         
     }

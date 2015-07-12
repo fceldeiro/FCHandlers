@@ -9,12 +9,12 @@
 import Foundation
 
 
-class EventManager{
+class EventManager<T>{
 
-    let handlerMapTable : NSMapTable = NSMapTable(keyOptions: NSPointerFunctionsWeakMemory, valueOptions: NSPointerFunctionsStrongMemory)
+    private let handlerMapTable : NSMapTable = NSMapTable(keyOptions: NSPointerFunctionsWeakMemory, valueOptions: NSPointerFunctionsStrongMemory)
     
     
-    func addListener(owner:NSObject, evaluation:(event:Event)->Bool,callback:(event:Event)->Void) ->HandlerCallback{
+    func addListener(owner:NSObject, evaluation:(event:T)->Bool,callback:(event:T)->Void) ->HandlerCallback<T>{
         
         //Callback may not be needed
         var handler:HandlerCallback = HandlerCallback(evaluation: evaluation, callback: callback)
@@ -55,25 +55,25 @@ class EventManager{
     }
 
     // TODO: Must implement
-    func removeListener(handler:HandlerCallback){
+    func removeListener(handler:HandlerCallback<T>){
         
         
 
     }
     //TODO: Must implement
-    func removeListener(owner:AnyObject){
+    func removeListener(owner:NSObject){
         
         self.handlerMapTable.removeObjectForKey(owner)
         println(self.handlerMapTable)
         
     }
         
-    func triggerEvent(newEvent:Event){
+    func triggerEvent(newEvent:T){
         
         /// Reviso todos los handlers
         println("")
         println("Triggering event:");
-        println(newEvent.description);
+        println(newEvent)
         println("")
         
         
@@ -88,7 +88,7 @@ class EventManager{
             
                 for  var index = 0 ; index < handlerArray.count ; ++index{
                     
-                    if let handler:HandlerCallback = handlerArray[index] as? HandlerCallback{
+                    if let handler:HandlerCallback<T> = handlerArray[index] as? HandlerCallback{
                         if handler.evaluation(event: newEvent){
                             handler.callback(event: newEvent)
                         }
