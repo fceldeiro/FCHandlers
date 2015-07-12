@@ -10,6 +10,7 @@ import UIKit
 import SlackTextViewController
 import SDWebImage
 
+
 class SlackChatTableViewController: SLKTextViewController {
   
   static let kCellIdentifierMessenger = "kCellIdentifierMessenger"
@@ -20,6 +21,8 @@ class SlackChatTableViewController: SLKTextViewController {
   var targetUserIdentifier:String?
   
   var messages : Array<SocketEvent>
+  
+  var myClass : MyClass = MyClass()
   
   init(){
     self.messages = []
@@ -54,6 +57,8 @@ class SlackChatTableViewController: SLKTextViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    myClass.testWithSocket(socketManager)
     
     socketManager.connect()
     // Do any additional setup after loading the view.

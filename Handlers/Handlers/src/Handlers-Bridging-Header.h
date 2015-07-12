@@ -6,3 +6,4 @@
 #import "MessageImageTableViewCell.h"
 #import "MessageTableViewCell.h"
 #import "MessageTextView.h"
+#import "MyClass.h"

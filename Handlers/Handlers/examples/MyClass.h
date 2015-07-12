@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 
-@interface MyClass : NSObject
+@class SocketManager;
 
+@interface MyClass : NSObject
+-(void) test;
+-(void) testWithSocket:(SocketManager*) manager;
 @end

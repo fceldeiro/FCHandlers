@@ -9,7 +9,7 @@
 import Foundation
 
 
-class EventManager<T>{
+class EventManager<T> {
   
   private let handlerMapTable  = NSMapTable(keyOptions: NSPointerFunctionsWeakMemory, valueOptions: NSPointerFunctionsStrongMemory)
   

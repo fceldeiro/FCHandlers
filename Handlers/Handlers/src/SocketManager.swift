@@ -17,15 +17,17 @@ enum SocketEventType: String{
   case Error = "error"
 }
 
-class SocketManager {
+class SocketManager : NSObject {
   
+  private var userUID : String?
   private let socket:SocketIOClient
   private lazy var eventManagers  = [SocketEventType : EventManager<SocketEvent>]()
   
   
-  init(url:String){
+  required init(url:String){
     
     socket = SocketIOClient(socketURL: url)
+    super.init()
     addHandlers()
     
   }
@@ -60,8 +62,12 @@ class SocketManager {
   }
   
   func connect (){
+    if (socket.connected || socket.connecting){
+      return
+    }
     socket.connect()
   }
+  
   func disconnect(){
     socket.close(fast: false)
   }
@@ -70,15 +76,29 @@ class SocketManager {
     socketEventType : SocketEventType,
     evaluation:(event:SocketEvent)->Bool,
     callback:(event:SocketEvent)->Void) -> HandlerCallback<SocketEvent>? {
-    
-    if let manager:EventManager<SocketEvent> = self.eventManagers[socketEventType] {
-      return  manager.addListener(owner,evaluation: evaluation,callback: callback)
       
-    }
-    else{
-      return nil
-    }
-    
+      if let manager:EventManager<SocketEvent> = self.eventManagers[socketEventType] {
+        return  manager.addListener(owner,evaluation: evaluation,callback: callback)
+        
+      }
+      else{
+        return nil
+      }
+      
+  }
+  
+  /**
+  For Objective-C
+  */
+  func addListener(owner:NSObject,
+    socketEventTypeString : String,
+    evaluation:(event:SocketEvent)->Bool,
+    callback:(event:SocketEvent)->Void) -> Void {
+      
+      if let socketEventType = SocketEventType(rawValue: socketEventTypeString){
+        addListener(owner, socketEventType: socketEventType, evaluation: evaluation, callback: callback)
+      }
+      
   }
   
   // TODO: Must implement
@@ -111,6 +131,29 @@ class SocketManager {
     socket.emit(socketEventType.rawValue, event.jsonDictionary())
     return event
     
+  }
+  
+  /**
+  For Objective-C
+  */
+  func emit(#socketEventTypeString:String, payloadData:PayloadBase) -> SocketEvent?{
+    
+    var payloadType : PayloadType?
+    
+    if let socketEventType:SocketEventType = SocketEventType(rawValue: socketEventTypeString){
+      if let payloadText:PayloadText = payloadData as? PayloadText{
+        payloadType = PayloadType.Text(payload: payloadText)
+      }
+      else if let payloadImage:PayloadImage = payloadData as? PayloadImage{
+        payloadType = PayloadType.Image(payload: payloadImage)
+      }
+      
+      if let payloadTypeUnwrapped = payloadType{
+        return emit(socketEventType: socketEventType, payload: payloadTypeUnwrapped)
+      }
+    }
+    
+    return nil
   }
   
 }

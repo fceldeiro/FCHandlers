@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class SocketEvent {
+class SocketEvent : NSObject {
   
   static let kFrom = "from"
   static let kTo = "to"
@@ -19,8 +19,29 @@ class SocketEvent {
   
   var from : String?
   var to : String?
-  var payload : PayloadType?
   var identifier :String?
+  
+  var payload : PayloadType?
+  
+  @objc var payloadData  : PayloadBase? {
+    get{
+      
+      if let payload = self.payload{
+        switch payload{
+        case .Text(let payloadData):
+          return payloadData
+        case .Image(let payloadData):
+          return payloadData
+        default:
+          return nil
+        }
+      }
+      
+      return nil
+    }
+  }
+  
+  
   
   
   init(identifier:String, from:String,to:String,payload:PayloadType){
@@ -100,7 +121,7 @@ class SocketEvent {
   }
   
   
-  var description : String {
+  override var description : String {
     get {
       
       var desc = String()
