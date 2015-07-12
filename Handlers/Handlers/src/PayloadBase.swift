@@ -11,41 +11,41 @@ import SwiftyJSON
 
 
 class PayloadBase : NSObject {
-    let type :String
-    var senderIdentifier : String? //Variable de prueba
-    var senderName : String? //variable de prueba
+  let type :String
+  var senderIdentifier : String? //Variable de prueba
+  var senderName : String? //variable de prueba
+  
+  init (type:String){
+    self.type = type
+  }
+  init (json:JSON){
+    type = json["type"].string!
+    senderIdentifier = json["sender_identifier"].string
+    senderName = json["sender_name"].string
     
-    init (type:String){
-        self.type = type
-    }
-    init (json:JSON){
-        self.type = json["type"].string!
-        self.senderIdentifier = json["sender_identifier"].string
-        self.senderName = json["sender_name"].string
-
-    }
+  }
+  
+  func jsonDictionary() -> [String : AnyObject] {
     
-    func jsonDictionary() -> Dictionary<String,AnyObject>{
-        
-        var dictionary: Dictionary<String,AnyObject> = Dictionary<String,AnyObject>()
-        
-        dictionary["type"] = self.type;
-        
-        if (self.senderIdentifier != nil){
-            dictionary["sender_identifier" ] = self.senderIdentifier!
-        }
-        
-        if (self.senderName != nil){
-            dictionary["sender_name"] = self.senderName
-        }
-        
-        return dictionary
+    var dictionary = [String : AnyObject]()
+    
+    dictionary["type"] = type;
+    
+    if (senderIdentifier != nil){
+      dictionary["sender_identifier" ] = senderIdentifier!
     }
     
-    override var  description: String{
-        get {
-            return self.jsonDictionary().description
-        }
+    if (senderName != nil){
+      dictionary["sender_name"] = senderName
     }
-   
+    
+    return dictionary
+  }
+  
+  override var  description: String{
+    get {
+      return jsonDictionary().description
+    }
+  }
+  
 }

@@ -9,12 +9,12 @@
 import Foundation
 
 class HandlerCallback<T> {
-    
-    let evaluation : (event:T) -> Bool
-    let callback : (event:T) -> Void
-    
-    init (evaluation:(event:T) ->Bool, callback:(event:T)-> Void){
-        self.evaluation = evaluation
-        self.callback = callback
-    }
+  
+  let evaluation : (event:T) -> Bool
+  let callback : (event:T) -> Void
+  
+  init (evaluation:(event:T) ->Bool, callback:(event:T)-> Void){
+    self.evaluation = evaluation
+    self.callback = callback
+  }
 }

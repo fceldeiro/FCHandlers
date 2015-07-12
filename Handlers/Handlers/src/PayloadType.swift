@@ -30,7 +30,7 @@ enum PayloadType {
         }
     }
     
-    func jsonDictionary() -> Dictionary<String,AnyObject>?{
+  func jsonDictionary() -> [String : AnyObject]?{
         
         switch self{
         case .Text(let payloadText):

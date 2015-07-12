@@ -12,104 +12,105 @@ import SwiftyJSON
 
 
 enum SocketEventType: String{
-    case Connect = "connect"
-    case Message = "message"
-    case Error = "error"
+  case Connect = "connect"
+  case Message = "message"
+  case Error = "error"
 }
 
 class SocketManager {
+  
+  private let socket:SocketIOClient
+  private lazy var eventManagers  = [SocketEventType : EventManager<SocketEvent>]()
+  
+  
+  init(url:String){
     
-    private let socket:SocketIOClient
-    private lazy var eventManagers  = Dictionary<SocketEventType,EventManager<SocketEvent>>()
+    socket = SocketIOClient(socketURL: url)
+    addHandlers()
     
+  }
+  
+  private func addHandlers(){
     
-    init(url:String){
-        
-        self.socket = SocketIOClient(socketURL: url)
-        self.addHandlers()
-        
+    eventManagers[SocketEventType.Connect] = EventManager<SocketEvent>()
+    socket.on(SocketEventType.Connect.rawValue) { data, ack in
+      
+      println("Socket connected")
+      
     }
     
-    private func addHandlers(){
+    eventManagers[SocketEventType.Message] = EventManager<SocketEvent>()
+    socket.on(SocketEventType.Message.rawValue) { data, ack in
+      
+      
+      if let eventDictionary: AnyObject = data!.lastObject{
+        let json = JSON(eventDictionary)
         
-        eventManagers[SocketEventType.Connect] = EventManager<SocketEvent>()
-        socket.on(SocketEventType.Connect.rawValue) { data, ack in
-            
-           println("Socket connected")
-            
+        let event: SocketEvent = SocketEvent(json: json)
+        if let eventManager = self.eventManagers[SocketEventType.Message]{
+          eventManager.triggerEvent(event)
         }
-        
-        eventManagers[SocketEventType.Message] = EventManager<SocketEvent>()
-        socket.on(SocketEventType.Message.rawValue) { data, ack in
-            
-            
-            if let eventDictionary: AnyObject = data!.lastObject{
-                let json = JSON(eventDictionary)
-                
-                let event: SocketEvent = SocketEvent(json: json)
-                if let eventManager = self.eventManagers[SocketEventType.Message]{
-                    eventManager.triggerEvent(event)
-                }
-            }
-        }
-        
-        eventManagers[SocketEventType.Error] = EventManager<SocketEvent>()
-        socket.on(SocketEventType.Error.rawValue) { data, ack in
-            
-        }
+      }
     }
     
-    func connect (){
-        socket.connect()
+    eventManagers[SocketEventType.Error] = EventManager<SocketEvent>()
+    socket.on(SocketEventType.Error.rawValue) { data, ack in
+      
     }
-    func disconnect(){
-        socket.close(fast: false)
+  }
+  
+  func connect (){
+    socket.connect()
+  }
+  func disconnect(){
+    socket.close(fast: false)
+  }
+  
+  func addListener(owner:NSObject,
+    socketEventType : SocketEventType,
+    evaluation:(event:SocketEvent)->Bool,
+    callback:(event:SocketEvent)->Void) -> HandlerCallback<SocketEvent>? {
+    
+    if let manager:EventManager<SocketEvent> = self.eventManagers[socketEventType] {
+      return  manager.addListener(owner,evaluation: evaluation,callback: callback)
+      
+    }
+    else{
+      return nil
     }
     
-    func addListener(socketEventType:SocketEventType, owner:NSObject, evaluation:(event:SocketEvent)->Bool,callback:(event:SocketEvent)->Void) ->HandlerCallback<SocketEvent>?{
-        
-        if let manager:EventManager<SocketEvent> = self.eventManagers[socketEventType] {
-            return  manager.addListener(owner,evaluation: evaluation,callback: callback)
-
-        }
-        else{
-            return nil
-        }
-     
+  }
+  
+  // TODO: Must implement
+  func removeListener(#handler:HandlerCallback<SocketEvent>){
+    
+  }
+  
+  func removeListener(target:NSObject){
+    
+    for socketEventType:SocketEventType  in eventManagers.keys{
+      removeListener(target, socketEventType: socketEventType)
+    }
+  }
+  
+  func removeListener(target:NSObject,socketEventType:SocketEventType){
+    
+    if let eventManager = eventManagers[socketEventType]{
+      eventManager.removeListener(target)
     }
     
-    // TODO: Must implement
-    func removeListener(handler:HandlerCallback<SocketEvent>){
-        
-    }
+  }
+  
+  func emit(#socketEventType:SocketEventType, event:SocketEvent){
+    socket.emit(socketEventType.rawValue, event.jsonDictionary())
+  }
+  
+  func emit(#socketEventType:SocketEventType, payload:PayloadType) -> SocketEvent{
     
-    func removeListener(target:NSObject){
-        
-        for socketEventType:SocketEventType  in self.eventManagers.keys{
-            removeListener(socketEventType, target: target)
-        }
-    }
+    let event = SocketEvent(identifier: "xxx-test", from: "x", to: "y", payload: payload)
+    socket.emit(socketEventType.rawValue, event.jsonDictionary())
+    return event
     
-    func removeListener(socketEventType:SocketEventType , target:NSObject){
-        
-        if let eventManager = self.eventManagers[socketEventType]{
-            eventManager.removeListener(target)
-        }
-        
-    }
-    
-    func emit(socketEventType:SocketEventType, event:SocketEvent){
-        socket.emit(socketEventType.rawValue, event.jsonDictionary())
-    }
-    func emit(socketEventType:SocketEventType, payload:PayloadType) -> SocketEvent{
-        
-        //let event = Event(identifier:"xxx-text", from: "x", to: "y", payload: payload)
-        let event = SocketEvent(identifier: "xxx-test", from: "x", to: "y", payload: payload)
-        socket.emit(socketEventType.rawValue, event.jsonDictionary())
-        return event
-        
-    }
-    
-
-
+  }
+  
 }

@@ -10,27 +10,27 @@ import UIKit
 import SwiftyJSON
 
 class PayloadText: PayloadBase {
-    let text : String?
+  let text : String?
+  
+  
+  init(text:String){
+    self.text = text
+    super.init(type: "text")
+  }
+  override init (json:JSON){
     
+    self.text = json["text"].string
+    super.init(json:json)
+  }
+  
+  
+  override func jsonDictionary() -> [String : AnyObject]{
     
-    init(text:String){
-        self.text = text
-        super.init(type: "text")
+    var  superDictionary = super.jsonDictionary()
+    if let text = self.text{
+      superDictionary["text"] = text
     }
-    override init (json:JSON){
-        
-        self.text = json["text"].string
-        super.init(json:json)
-    }
+    return superDictionary
     
-
-    override func jsonDictionary() -> Dictionary<String,AnyObject>{
-        
-        var  superDictionary = super.jsonDictionary()
-        if let text = self.text{
-            superDictionary["text"] = text
-        }
-        return superDictionary
-
-    }
+  }
 }

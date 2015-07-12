@@ -10,36 +10,35 @@ import UIKit
 import SwiftyJSON
 
 class  PayloadImage: PayloadBase {
-    let imageURL: NSURL?
+  let imageURL: NSURL?
+  
+  init (imageURL:NSURL){
+    self.imageURL = imageURL
+    super.init(type: "image")
+  }
+  
+  override init(json: JSON) {
     
-    init (imageURL:NSURL){
-        self.imageURL = imageURL
-        super.init(type: "image")
+    if let urlString:String = json["image"].string, let imageURL = NSURL(string: urlString){
+      self.imageURL = imageURL
+      
+    }
+    else{
+      self.imageURL = nil
     }
     
-    override init(json: JSON) {
-        
-        if let urlString:String = json["image"].string, let imageURL = NSURL(string: urlString){
-            self.imageURL = imageURL
-            
-        }
-        else{
-            self.imageURL = nil
-        }
-        
-        super.init(json: json)
+    super.init(json: json)
+  }
+  
+  override func jsonDictionary() -> [String : AnyObject]{
+    
+    var  superDictionary = super.jsonDictionary()
+    if let absoluteStringURL = self.imageURL?.absoluteString{
+      superDictionary["image"] = absoluteStringURL
     }
     
-    override func jsonDictionary() -> Dictionary<String,AnyObject>{
-        
-        
-        var  superDictionary = super.jsonDictionary()
-        if let absoluteStringURL = self.imageURL?.absoluteString{
-            superDictionary["image"] = absoluteStringURL
-        }
-        
-        return superDictionary
-        
-    }
+    return superDictionary
     
+  }
+  
 }
